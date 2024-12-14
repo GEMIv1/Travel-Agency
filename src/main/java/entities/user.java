@@ -1,19 +1,47 @@
 package entities;
 
 public class user {
-    private String name;
+    private String userName;
+    private String Firstname;
+    private String LastName;
     private String address;
     private String email;
     private String age;
     private String phoneNumber;
+    private String password;
 
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String pass) {
+        this.password = pass;
+    }
+
+
+    public String getFName() {
+        return Firstname;
+    }
+
+    public void setFName(String name) {
+        this.Firstname = name;
+    }
+
+    public String getLName() {
+        return LastName;
+    }
+
+    public void setLName(String name) {
+        this.LastName = name;
     }
 
     public String getAddress() {
