@@ -2,8 +2,11 @@ package com.example.Travel_agency.services;
 
 import java.util.List;
 
-import entities.user;
+import org.springframework.stereotype.Service;
 
+import com.example.Travel_agency.entities.user;
+
+@Service
 public class loginVerification {
     
     public boolean perform(List<user> users, String username, String password){

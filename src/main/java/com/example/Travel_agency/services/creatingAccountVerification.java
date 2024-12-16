@@ -1,6 +1,11 @@
 package com.example.Travel_agency.services;
 import java.util.Set;
-import entities.user;
+
+import org.springframework.stereotype.Service;
+
+import com.example.Travel_agency.entities.user;
+
+@Service
 public class creatingAccountVerification{
     
 
@@ -49,7 +54,7 @@ public class creatingAccountVerification{
             }
         }
 
-        if((int)pass.length()<=16 && (int)pass.length()>=8){// max 16, min 8 
+        if((int)pass.length()>=8){
             boolean isUpper = false;
             boolean isLower = false;
             boolean isSpecialChar = false;
@@ -77,7 +82,6 @@ public class creatingAccountVerification{
 
         if(isValidEmail && isValidPhoneNumber && isValidFname && isValidLname && isValidPassword){
             return true;
-            // MESSAGE GENERATION;
         }
 
         return false;
