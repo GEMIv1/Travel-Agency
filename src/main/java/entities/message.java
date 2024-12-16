@@ -4,6 +4,9 @@ abstract public class message {
     private String recipient;
     private String content;
 
+    public message() {
+    }
+
     public message(String recipient, String content) {
         this.recipient = recipient;
         this.content = content;

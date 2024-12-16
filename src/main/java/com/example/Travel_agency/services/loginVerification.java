@@ -9,7 +9,7 @@ import com.example.Travel_agency.entities.user;
 @Service
 public class loginVerification {
     
-    public boolean perform(List<user> users, String username, String password){
+    public user perform(List<user> users, String username, String password){
         boolean isCorrectPassword = false;
         boolean isCorrectUsername = false;
         for(user u: users){
@@ -19,13 +19,13 @@ public class loginVerification {
             if(username.equals(u.getUserName())){
                 isCorrectUsername = true;
             }
+            if(isCorrectPassword && isCorrectUsername){
+                return u;
+            }
         }
         
-        if(isCorrectPassword && isCorrectUsername){
-            return true;
-        }
-
-        return false;
+        
+        return null;
     }
 
 }

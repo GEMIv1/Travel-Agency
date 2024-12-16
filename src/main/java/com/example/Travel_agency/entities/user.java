@@ -9,7 +9,17 @@ public class user {
     private String age;
     private String phoneNumber;
     private String password;
+    private String channel;
 
+
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
 
     public String getUserName() {
         return userName;

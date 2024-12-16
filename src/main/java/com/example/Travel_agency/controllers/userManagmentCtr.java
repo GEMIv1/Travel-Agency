@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Travel_agency.services.ResetPasswordVerification;
 import com.example.Travel_agency.services.creatingAccountVerification;
 import com.example.Travel_agency.services.loginVerification;
+import com.example.Travel_agency.entities.message;
 import com.example.Travel_agency.entities.user;
+import com.example.Travel_agency.interfaces.IMessageRepository;
 import com.example.Travel_agency.interfaces.IUserRepository;
 
-
+@RestController
 public class userManagmentCtr {
 
 /* Make interface for each service */
@@ -25,7 +27,10 @@ public class userManagmentCtr {
     private IUserRepository userRepository;
     @Autowired
     private ResetPasswordVerification restPass;
+    @Autowired
+    private IMessageRepository messageRepository;
 
+    @PostMapping("/travel_agency/create_account")
     public void setUserDetails(
         @RequestParam String username,
         @RequestParam String Fname,
@@ -34,7 +39,8 @@ public class userManagmentCtr {
         @RequestParam String address,
         @RequestParam String email,
         @RequestParam String age,
-        @RequestParam String password) {
+        @RequestParam String password,
+        @RequestParam String channel) {
         
         user u = new user();
         u.setFName(Fname);
@@ -45,27 +51,39 @@ public class userManagmentCtr {
         u.setAge(age);
         u.setPassword(password);
         u.setUserName(username);
+        u.setChannel(channel);
+        
 
         if(createAccount.perform(u)){
             userRepository.saveUser(u);
-            //send account created success
+            messageRepository.saveMessage(new message(channel, "Dear: " + username + "the account created successfully", "NOTSENT"));
             System.out.println("User added");
         }else{
             System.out.println("Incorrect Information");
         }
     }
 
-    public boolean loginVerification(@RequestParam String username, @RequestParam String password){ 
-        if(login.perform(userRepository.getAllUsers(),username,password)){
-            //send loing success email
+    @PostMapping("/travel_agency/login")
+    public boolean loginVerification(@RequestParam String username, @RequestParam String password, @RequestParam(required = false) String channelOverride){ 
+        
+        user u = login.perform(userRepository.getAllUsers(),username,password);
+        String channelToUse = (channelOverride != null) ? channelOverride : u.getChannel();
+
+        if(u != null){
+            messageRepository.saveMessage(new message(channelToUse, "Dear: " + username + "login done successfully", "NOTSENT"));
             return true;
         }
         return false;
     }
 
-    public boolean ResetPassword(@RequestParam String username, @RequestParam String oldPassword){
-        if(restPass.perform(userRepository.getAllUsers(),username,oldPassword)){
-            //send email/sms with the new password
+    @PostMapping("/travel_agency/reset_password")
+    public boolean ResetPassword(@RequestParam String username, @RequestParam String oldPassword, @RequestParam(required = false) String channelOverride){
+        
+        user u = restPass.perform(userRepository.getAllUsers(),username,oldPassword);
+        String channelToUse = (channelOverride != null) ? channelOverride : u.getChannel();
+
+        if(u!=null){
+            messageRepository.saveMessage(new message(channelToUse, "Dear: " + username + "login done successfully", "NOTSENT"));
             return true;
         }
         return false;

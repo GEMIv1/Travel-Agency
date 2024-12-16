@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.Travel_agency.entities.message;
 import com.example.Travel_agency.entities.user;
 import com.example.Travel_agency.interfaces.IMessageRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Service
 public class messageDatabase implements IMessageRepository{
 
 
@@ -19,13 +22,13 @@ public class messageDatabase implements IMessageRepository{
 
 
     @Override
-    public void saveMessage(message u) {
-         List<message> messages = new ArrayList<>();
-         try {
+    public void saveMessage(message m) {
+        List<message> messages = new ArrayList<>();
+        try {
             messages = getAllMessage();
-            messages.add(u);  
+            messages.add(m);  
             
-            objectMapper.writeValue(new File(filePath), new TypeReference<ArrayList<message>>() {});
+            objectMapper.writeValue(new File(filePath), messages);
         } catch (IOException e) {
             System.out.println("Error while saving message: " + e.getMessage());
         }
@@ -44,19 +47,5 @@ public class messageDatabase implements IMessageRepository{
         }
         return messages;
     }
-
-
-
-
-
-    
-
-
-    
-
-
-
-
-
 
 }

@@ -68,7 +68,7 @@ public class creatingAccountVerification{
                 if(isUpper && isLower && isSpecialChar && isDigit){isValidPassword = true;break;}
             }
             
-            System.out.println(isUpper);
+            /*System.out.println(isUpper);
             System.out.println(isLower);
             System.out.println(isSpecialChar);
             System.out.println(isDigit);
@@ -76,7 +76,7 @@ public class creatingAccountVerification{
             System.out.println(isValidPassword);
             System.out.println(isValidPhoneNumber);
             System.out.println(isValidFname);
-            System.out.println(isValidLname);
+            System.out.println(isValidLname);*/
 
         }
 
