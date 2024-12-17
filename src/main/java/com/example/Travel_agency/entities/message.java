@@ -1,23 +1,28 @@
 package com.example.Travel_agency.entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+@JsonIgnoreProperties(ignoreUnknown = true) // Ignore unrecognized fields
 public class message {
 
     private String channel;
     private String content;
     private String status;
-    public static long id = 0;
     private long exactId;
 
     @JsonCreator
     public message(@JsonProperty("channel") String channel, 
                    @JsonProperty("content") String content, 
                    @JsonProperty("status") String status) {
-        this.exactId = id++;
         this.channel = channel;
         this.content = content;
         this.status = status;
+    }
+
+    public void setId(long id) {
+        this.exactId = id;
     }
 
     public long getId() {
@@ -55,8 +60,5 @@ public class message {
                ", content='" + content + '\'' +
                ", status='" + status + '\'' + "}";
     }
-    
-
-
 
 }

@@ -18,20 +18,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class messageDatabase implements IMessageRepository{
 
 
-    private String filePath = "D:\\SDA_Project\\messageData.json";
+    private String filePath = "C:\\Users\\ALRWOAD LAPTOB\\OneDrive\\Desktop\\Travel_agency1\\SDA_Project\\messageData.json";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
     @Override
-    public void saveMessage(message m) {
-        
+    public void saveMessage(message newMessage) {
         try {
             List<message> messages = getAllMessage();
-            messages.add(m);  
-            
+
+            // Set the ID based on the last message's ID, or 1 if the list is empty
+            long nextId = messages.isEmpty() ? 1 : messages.get(messages.size() - 1).getId() + 1;
+            newMessage.setId(nextId);
+
+            // Add the new message
+            messages.add(newMessage);
+
+            // Serialize the updated list back to the file
             objectMapper.writeValue(new File(filePath), messages);
-        } catch (IOException e) {
-            System.out.println("Error while saving user: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
