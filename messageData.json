@@ -1,6 +1,8 @@
-[ {
-  "channel" : "sms",
-  "content" : "Dear: gemithe account created successfully",
-  "status" : "NOTSENT",
-  "id" : 1
-} ]
+[
+    {
+        "channel": "sms",
+        "content": "Dear: ahmed123the account created successfully",
+        "status": "NOTSENT",
+        "id": 2
+    }
+]

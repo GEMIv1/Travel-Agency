@@ -1,21 +1,26 @@
 package com.example.Travel_agency.entities;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class message {
 
     private String channel;
     private String content;
     private String status;
-    private int exactId;
-    public static int id = 0;
+    public static long id = 0;
+    private long exactId;
 
-    public message(String channel, String content, String status) {
-        exactId = id;
+    @JsonCreator
+    public message(@JsonProperty("channel") String channel, 
+                   @JsonProperty("content") String content, 
+                   @JsonProperty("status") String status) {
+        this.exactId = id++;
         this.channel = channel;
         this.content = content;
         this.status = status;
     }
 
-    public int getId() {
+    public long getId() {
         return exactId;
     }
 

@@ -29,9 +29,9 @@ public class messageDatabase implements IMessageRepository{
             List<message> messages = getAllMessage();
             messages.add(m);  
             
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), messages);        
+            objectMapper.writeValue(new File(filePath), messages);
         } catch (IOException e) {
-            System.out.println("Error while saving message: " + e.getMessage());
+            System.out.println("Error while saving user: " + e.getMessage());
         }
     }
 
@@ -43,9 +43,6 @@ public class messageDatabase implements IMessageRepository{
             if (file.exists()) {
                 messages = objectMapper.readValue(file, new TypeReference<ArrayList<message>>() {});
             }
-            else {
-                objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, messages);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +51,7 @@ public class messageDatabase implements IMessageRepository{
 
     @Override
     public void updateMessage(message u) {
-        try {
+        /*try {
             List<message> messages =  getAllMessage();
 
             for (message m : messages) {
@@ -67,7 +64,7 @@ public class messageDatabase implements IMessageRepository{
             System.out.println("Message successfully updated in the JSON file.");
         } catch (IOException e) {
             System.err.println("Failed to update JSON file: " + e.getMessage());
-        }
+        }*/
     }
 
 }

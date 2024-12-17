@@ -56,7 +56,6 @@ public class userManagmentCtr {
 
         if(createAccount.perform(u)){
             userRepository.saveUser(u);
-            message.id++;
             messageRepository.saveMessage(new message(channel, "Dear: " + username + "the account created successfully", "NOTSENT"));
             System.out.println("User added");
         }else{
@@ -71,8 +70,6 @@ public class userManagmentCtr {
         String channelToUse = (channelOverride != null) ? channelOverride : u.getChannel();
 
         if(u != null){
-            message.id++;
-            
             messageRepository.saveMessage(new message(channelToUse, "Dear: " + username + " login done successfully", "NOTSENT"));
             return true;
         }
@@ -87,7 +84,6 @@ public class userManagmentCtr {
         System.out.println(u.getChannel());
 
         if(u!=null){
-            message.id++;
             messageRepository.saveMessage(new message(channelToUse, "Dear: " + username + "new password is "+ u.getPassword(), "NOTSENT"));
             return true;
         }
