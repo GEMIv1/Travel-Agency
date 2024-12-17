@@ -56,6 +56,7 @@ public class userManagmentCtr {
 
         if(createAccount.perform(u)){
             userRepository.saveUser(u);
+            message.id++;
             messageRepository.saveMessage(new message(channel, "Dear: " + username + "the account created successfully", "NOTSENT"));
             System.out.println("User added");
         }else{
@@ -70,7 +71,9 @@ public class userManagmentCtr {
         String channelToUse = (channelOverride != null) ? channelOverride : u.getChannel();
 
         if(u != null){
-            messageRepository.saveMessage(new message(channelToUse, "Dear: " + username + "login done successfully", "NOTSENT"));
+            message.id++;
+            
+            messageRepository.saveMessage(new message(channelToUse, "Dear: " + username + " login done successfully", "NOTSENT"));
             return true;
         }
         return false;
@@ -79,14 +82,20 @@ public class userManagmentCtr {
     @PostMapping("/travel_agency/reset_password")
     public boolean ResetPassword(@RequestParam String username, @RequestParam String oldPassword, @RequestParam(required = false) String channelOverride){
         
-        user u = restPass.perform(userRepository.getAllUsers(),username,oldPassword);
+        user u = restPass.perform(userRepository.getAllUsers(),username,oldPassword,userRepository);
         String channelToUse = (channelOverride != null) ? channelOverride : u.getChannel();
+        System.out.println(u.getChannel());
 
         if(u!=null){
-            messageRepository.saveMessage(new message(channelToUse, "Dear: " + username + "login done successfully", "NOTSENT"));
+            message.id++;
+            messageRepository.saveMessage(new message(channelToUse, "Dear: " + username + "new password is "+ u.getPassword(), "NOTSENT"));
             return true;
         }
         return false;
+    }
+    @GetMapping("/travel_agency/get_user_details")
+    public List<user> getAllUsers(){
+        return userRepository.getAllUsers();
     }
 
 }

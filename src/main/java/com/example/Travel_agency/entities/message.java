@@ -5,12 +5,20 @@ public class message {
     private String channel;
     private String content;
     private String status;
+    private int exactId;
+    public static int id = 0;
 
     public message(String channel, String content, String status) {
+        exactId = id;
         this.channel = channel;
         this.content = content;
         this.status = status;
     }
+
+    public int getId() {
+        return exactId;
+    }
+
     public String getStatus() {
         return status;
     }

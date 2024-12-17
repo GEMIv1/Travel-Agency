@@ -59,29 +59,20 @@ public class userDatabase implements IUserRepository {
     }
 
     @Override
-    public void updatePassword(String password) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updatePassword'");
-    }
+    public void updatePassword(user u) {
+        try{
+            List<user> users = getAllUsers();
+            for(user i: users){
+                if(u.getUserName().equals(i.getUserName())){
+                    i.setPassword(u.getPassword());
+                }
+            }
 
-    private String userToString(user u){
-        return String.join(",",
-        u.getUserName(), u.getFName(), u.getLName(), u.getAddress(),
-        u.getEmail(), u.getAge(), u.getPhoneNumber(), u.getPassword());
-    }
+            objectMapper.writeValue(new File(filePath),users);
 
-    private user StringToUser(String line){
-        String[] data = line.split(",");
-        user u = new user();
-        u.setUserName(data[0]);
-        u.setFName(data[1]);
-        u.setLName(data[2]);
-        u.setAddress(data[3]);
-        u.setEmail(data[4]);
-        u.setAge(data[5]);
-        u.setPhoneNumber(data[6]);
-        u.setPassword(data[7]);
-        return u;
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 }

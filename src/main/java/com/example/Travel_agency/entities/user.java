@@ -1,5 +1,7 @@
 package com.example.Travel_agency.entities;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 public class user {
     private String userName;
     private String Firstname;
@@ -12,6 +14,28 @@ public class user {
     private String channel;
 
 
+    public user(){}
+
+    public user(    String username,
+        String Fname,
+         String Lname,
+         String phoneNumber,
+         String address,
+         String email,
+         String age,
+         String password,
+         String channel){
+
+            this.userName = username;
+            this.Firstname = Firstname;
+            this.LastName = LastName;
+            this.phoneNumber = phoneNumber;
+            this.email = email;
+            this.address = address;
+            this.age = age;
+            this.password = password;
+            this.channel = channel;
+         }
 
     public String getChannel() {
         return channel;

@@ -1,16 +1,30 @@
 package com.example.Travel_agency.notificationQueue;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.Travel_agency.entities.message;
+import com.example.Travel_agency.interfaces.IMessageRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class NotificationConsumer implements Runnable {
+
+    private final  IMessageRepository messageRepository;
+
+    private final ObjectMapper objectMapper;
+
+    public NotificationConsumer(IMessageRepository mRepo){
+        this.messageRepository = mRepo;
+        objectMapper = new ObjectMapper();
+    }
+
+
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) { // Check if thread is interrupted
+        while (!Thread.currentThread().isInterrupted()) { 
             try {
                 message msg = NotificationQueue.getMessage();
                 System.out.println("Processing message: " + msg);
 
-                // Simulate sending logic
                 if ("email".equalsIgnoreCase(msg.getChannel())) {
                     sendEmail(msg);
                 } else if ("sms".equalsIgnoreCase(msg.getChannel())) {
@@ -20,7 +34,7 @@ public class NotificationConsumer implements Runnable {
                 System.out.println("Message processed: " + msg);
             } catch (InterruptedException e) {
                 System.out.println("Consumer thread interrupted. Exiting.");
-                Thread.currentThread().interrupt(); // Set interrupted status
+                Thread.currentThread().interrupt();
                 break;
             } catch (Exception e) {
                 System.out.println("Error while processing message: " + e.getMessage());

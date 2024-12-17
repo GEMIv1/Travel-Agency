@@ -11,6 +11,7 @@ import com.example.Travel_agency.entities.message;
 public interface IMessageRepository {
 
     void saveMessage(message u);
+    void updateMessage(message u);
     List<message> getAllMessage();
 
 }

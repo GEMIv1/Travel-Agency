@@ -12,6 +12,6 @@ public interface IUserRepository {
     void saveUser(user u);
     List<user> getAllUsers();
     user searchUsername(String username);
-    void updatePassword(String password);
+    void updatePassword(user u);
 
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.message.Message;
 import org.springframework.stereotype.Service;
 
 import com.example.Travel_agency.entities.message;
@@ -23,12 +24,12 @@ public class messageDatabase implements IMessageRepository{
 
     @Override
     public void saveMessage(message m) {
-        List<message> messages = new ArrayList<>();
+        
         try {
-            messages = getAllMessage();
+            List<message> messages = getAllMessage();
             messages.add(m);  
             
-            objectMapper.writeValue(new File(filePath), messages);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), messages);        
         } catch (IOException e) {
             System.out.println("Error while saving message: " + e.getMessage());
         }
@@ -42,10 +43,31 @@ public class messageDatabase implements IMessageRepository{
             if (file.exists()) {
                 messages = objectMapper.readValue(file, new TypeReference<ArrayList<message>>() {});
             }
+            else {
+                objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, messages);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return messages;
+    }
+
+    @Override
+    public void updateMessage(message u) {
+        try {
+            List<message> messages =  getAllMessage();
+
+            for (message m : messages) {
+                if(m.getId() == u.getId()){
+                    m.setStatus(u.getStatus());
+                }
+            }
+
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), messages);
+            System.out.println("Message successfully updated in the JSON file.");
+        } catch (IOException e) {
+            System.err.println("Failed to update JSON file: " + e.getMessage());
+        }
     }
 
 }

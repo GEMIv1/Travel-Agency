@@ -2,15 +2,18 @@ package com.example.Travel_agency;
 import com.example.Travel_agency.notificationQueue.NotificationConsumer;
 import com.example.Travel_agency.notificationQueue.NotificationProducer;
 import com.example.Travel_agency.notificationQueue.NotificationQueue;
-import com.example.Travel_agency.entities.message;
+import com.example.Travel_agency.stored_data.messageDatabase;
+import com.example.Travel_agency.interfaces.IMessageRepository;
 
 public class NotificationApp {
     public static void main(String[] args) throws InterruptedException {
         
-        Thread consumerThread = new Thread(new NotificationConsumer());
+        IMessageRepository messageRepository =  new messageDatabase();
+        
+        Thread consumerThread = new Thread(new NotificationConsumer(messageRepository));
         consumerThread.start();
 
-
+        
 
         NotificationProducer producer = new NotificationProducer();
         producer.produceNotificationsFromFile();
