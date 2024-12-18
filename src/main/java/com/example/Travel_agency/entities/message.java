@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-@JsonIgnoreProperties(ignoreUnknown = true) // Ignore unrecognized fields
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class message {
 
     private String channel;
@@ -19,6 +19,13 @@ public class message {
         this.channel = channel;
         this.content = content;
         this.status = status;
+    }
+
+    public message(String channel, String content, String status, long id){ 
+        this.channel = channel;
+        this.content = content;
+        this.status = status;
+        this.exactId = id;
     }
 
     public void setId(long id) {

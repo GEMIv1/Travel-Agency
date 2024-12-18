@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResetPasswordVerification {
 
-    public user perform(List<user> allUsers, String username, String oldPassword, IUserRepository userRepository) {
+    public user perform(List<user> allUsers, String username, String oldPassword, IUserRepository userRepository, String token) {
         String guid = UUID.randomUUID().toString().replace("-", "");
         for(user u: allUsers){
             if(u.getUserName().equals(username) && u.getPassword().equals(oldPassword)){
@@ -20,6 +20,10 @@ public class ResetPasswordVerification {
             }
         }
         return null;
+    }
+
+    public user perform(List<user> allUsers, String username, String oldPassword, IUserRepository userRepository) {
+        return perform(allUsers, username, oldPassword, userRepository, null);
     }
     
 }

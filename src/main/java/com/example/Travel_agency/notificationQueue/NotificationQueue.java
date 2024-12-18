@@ -8,21 +8,25 @@ import com.example.Travel_agency.entities.message;
 public class NotificationQueue {
     private static final BlockingQueue<message> queue = new LinkedBlockingQueue<>();
 
-    public static void addMessage(message msg) {
-        try {
-            queue.put(msg);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Producer thread interrupted while adding message.");
+    public  static void addMessage(message msg) {
+        if (msg != null && "NOTSENT".equalsIgnoreCase(msg.getStatus())) {
+            try {
+                queue.put(msg);
+                System.out.println("Message added to the queue: " + msg.getContent());
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.out.println("Producer interrupted while adding message.");
+            }
+        } else {
+            System.out.println("Null or sent message cannot be added to the queue.");
         }
     }
-    
 
-    public static message getMessage() throws InterruptedException {
-        return queue.take(); // Blocks until a message is available
+    public  static message getMessage() throws InterruptedException {
+        return queue.take();  
     }
 
-    public static boolean isEmpty() {
+    public  static boolean isEmpty() {
         return queue.isEmpty();
     }
 }

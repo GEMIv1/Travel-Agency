@@ -1,3 +1,26 @@
-[{"channel":"sms","content":"Dear: ahmed123the account created successfully","status":"NOTSENT","id":1},
-  {"channel":"sms","content":"Dear: ahmed123the account created successfully","status":"NOTSENT","id":2},
-  {"channel":"sms","content":"Dear: ahmed123new password is ade48d0845ac46f0b39b6f8fb4934526","status":"NOTSENT","id":3}]
+[
+    {
+        "channel": "sms",
+        "content": "Dear: gemi the account created successfully",
+        "status": "SENT",
+        "id": 1
+    },
+    {
+        "channel": "sms",
+        "content": "Dear: gemi login done successfully",
+        "status": "SENT",
+        "id": 2
+    },
+    {
+        "channel": "sms",
+        "content": "Dear: geminew password is 2da17e5a1eb74f5dbfdf16fe99922227",
+        "status": "SENT",
+        "id": 3
+    },
+    {
+        "channel": "sms",
+        "content": "Dear: geminew password is f8fdf0417d8f494ebf24c1c8a2a3401c",
+        "status": "SENT",
+        "id": 4
+    }
+]
