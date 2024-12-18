@@ -1,59 +1,37 @@
 package com.example.Travel_agency.entities;
 
+import java.time.LocalDate;
+
 public class booking {
-    private String hotel_name;
-    private double minprice;  // Change from String to double
-    private double maxprice;  // Change from String to double
-    private String roomType;
-    private String startDate;
-    private String endDate;
+    private String userBooked;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    // Getters and Setters
-    public double getMinprice() {
-        return minprice;
-    }
-
-    public void setMinprice(double minprice) {
-        this.minprice = minprice;
-    }
-
-    public String getHotel_name() {
-        return hotel_name;
-    }
-
-    public void setHotel_name(String hotel_name) {
-        this.hotel_name = hotel_name;
-    }
-
-    public double getMaxprice() {
-        return maxprice;
-    }
-
-    public void setMaxprice(double maxprice) {
-        this.maxprice = maxprice;
-    }
-
-    public String getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
-    }
-
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
+    public String getUserBooked() {
+        return userBooked;
+    }
 
-    public void setEndDate(String endDate) {
+    public void setUserBooked(String userBooked) {
+        this.userBooked = userBooked;
+    }
+
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+    // violates S
+    public boolean overlaps(LocalDate start, LocalDate end) {
+        return (start.isBefore(endDate) || start.isEqual(endDate)) &&
+               (end.isAfter(startDate) || end.isEqual(startDate));
     }
 }

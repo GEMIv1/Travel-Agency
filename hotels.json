@@ -1,0 +1,30 @@
+[
+    {
+      "name": "Grand Plaza Hotel",
+      "rooms": [
+        {
+          "type": "Deluxe",
+          "price": 150.0
+        
+        },
+        {
+          "type": "Standard",
+          "price": 100.0
+        }
+      ]
+    },
+    {
+      "name": "Beachside Resort",
+      "rooms": [
+        {
+          "type": "Suite",
+          "price": 200.0
+        },
+        {
+          "type": "Economy",
+          "price": 80.0
+        }
+      ]
+    }
+  ]
+  

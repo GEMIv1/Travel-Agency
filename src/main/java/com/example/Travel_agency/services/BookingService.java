@@ -8,31 +8,18 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
 
-public class BookingService {
+@Service
+public class bookingService {
 
     private final List<booking> bookings = new ArrayList<>();
 
     // To search hotels
-    public List<booking> searchHotels(String hotelName, String minPrice, String maxPrice, String roomType, String startDate, String endDate) {
-        try {
-
-            double min = minPrice != null ? Double.parseDouble(minPrice) : 0.0;
-            double max = maxPrice != null ? Double.parseDouble(maxPrice) : Double.MAX_VALUE;
-
-            return bookings.stream()
-                    .filter(booking -> hotelName == null || booking.getHotel_name().equalsIgnoreCase(hotelName))
-                    .filter(booking -> booking.getMinprice() >= min)
-                    .filter(booking -> booking.getMaxprice() <= max)
-                    .filter(booking -> roomType == null || booking.getRoomType().equalsIgnoreCase(roomType))
-                    .collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid price format.");
-        }
-    }
+    /*
 
     // To book a hotel
-    public booking bookhotel(String hotelName, String roomType, String startDate, String endDate) {
+    public booking bookhotel(String hotelName, String roomType, LocalDate startDate, LocalDate endDate) {
         try {
             double price = calculatePrice(startDate, endDate);
 
@@ -51,11 +38,10 @@ public class BookingService {
         }
     }
 
-    private double calculatePrice(String startDate, String endDate) {
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+    private double calculatePrice(LocalDate startDate, LocalDate endDate) {
+        LocalDate start = (startDate);
+        LocalDate end = (endDate);
         long days = ChronoUnit.DAYS.between(start, end);
-        double ratePerDay = 100;  // Fixed rate per day
         return days * ratePerDay;
-    }
+    }*/
 }

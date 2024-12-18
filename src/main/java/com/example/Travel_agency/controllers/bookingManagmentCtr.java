@@ -1,52 +1,70 @@
 package com.example.Travel_agency.controllers;
 
-import com.example.Travel_agency.entities.booking;
-import com.example.Travel_agency.services.BookingService;
+import com.example.Travel_agency.entities.hotel;
+import com.example.Travel_agency.interfaces.IBook;
+import com.example.Travel_agency.interfaces.IHotelRepository;
+import com.example.Travel_agency.interfaces.ISearch;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class bookingManagmentCtr {
 
-    private BookingService bookingService;
 
-    // Search Hotels endpoint
+    @Autowired
+    private IHotelRepository hotelRepository;
+    @Autowired
+    private ISearch search;
+    @Autowired
+    private IBook book;
+    
+
+
+
     @GetMapping("/travel_agency/search_hotels")
-    public ResponseEntity<List<booking>> searchHotels(
+    public List<hotel> searchHotels(
             @RequestParam String hotel_name,
-            @RequestParam(required = false) String minPrice,
-            @RequestParam(required = false) String maxPrice,
-            @RequestParam(required = false) String roomType,
-            @RequestParam(required = false) String startDate,
-            @RequestParam(required = false) String endDate) {
+            @RequestParam(required = false) Double minPrice,
+            @RequestParam(required = false) Double maxPrice,
+            @RequestParam(required = false) String roomType) {
 
-        try {
-            List<booking> results = bookingService.searchHotels(hotel_name, minPrice, maxPrice, roomType, startDate, endDate);
-            return ResponseEntity.ok(results);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);  // Handle invalid input errors
+                System.out.println("Hotel Name: " + hotel_name);
+                System.out.println("Min Price: " + minPrice);
+                System.out.println("Max Price: " + maxPrice);
+                System.out.println("Room Type: " + roomType);
+
+                
+        List<hotel> res = hotelRepository.getHotels(hotel_name, minPrice, maxPrice, roomType);
+
+        if (res == null || res.isEmpty()) {
+            System.out.println("No hotels found.");
+            return new ArrayList<>();
         }
+        
+        return search.searchHotels(hotel_name,res,roomType, minPrice, maxPrice);
     }
 
     // Book Hotel endpoint
     @PostMapping("/travel_agency/book_hotel")
-    public ResponseEntity<booking> bookHotel(
+    public void bookHotel(
             @RequestParam String hotelName,
             @RequestParam String roomType,
-            @RequestParam String startDate,
-            @RequestParam String endDate) {
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate) {
+                /*
+                 * 
+                 * 
+                 * 
+                 * 
+                 */
 
-        try {
-            booking newBooking = bookingService.bookhotel(hotelName, roomType, startDate, endDate);
-            return ResponseEntity.ok(newBooking);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);  // Handle invalid input errors
-        }
+       
     }
 }
