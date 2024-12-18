@@ -1,26 +1,32 @@
 [
     {
-        "channel": "sms",
-        "content": "Dear: gemi the account created successfully",
+        "channel": "email",
+        "content": "Dear: seif the account created successfully",
         "status": "SENT",
         "id": 1
     },
     {
-        "channel": "sms",
-        "content": "Dear: gemi login done successfully",
+        "channel": "email",
+        "content": "Dear: yasser the account created successfully",
         "status": "SENT",
         "id": 2
     },
     {
-        "channel": "sms",
-        "content": "Dear: geminew password is 2da17e5a1eb74f5dbfdf16fe99922227",
+        "channel": "email",
+        "content": "Dear: seif new password is c0c5186b913f4180946e5b42b25469d1",
         "status": "SENT",
         "id": 3
     },
     {
-        "channel": "sms",
-        "content": "Dear: geminew password is f8fdf0417d8f494ebf24c1c8a2a3401c",
+        "channel": "email",
+        "content": "Dear: seif login done successfully",
         "status": "SENT",
         "id": 4
+    },
+    {
+        "channel": "email",
+        "content": "Dear: seif new password is a60f433ee5b14e43bc717b24019cccf9",
+        "status": "SENT",
+        "id": 5
     }
 ]

@@ -1,13 +1,24 @@
 [
     {
-        "userName": "gemi",
+        "userName": "seif",
         "address": "mokkatem",
         "email": "a@gmail.com",
-        "age": "20",
+        "age": "21",
         "phoneNumber": "01126724270",
-        "password": "f8fdf0417d8f494ebf24c1c8a2a3401c",
-        "channel": "sms",
-        "fname": "ahmedmoha",
-        "lname": "Kamel"
+        "password": "a60f433ee5b14e43bc717b24019cccf9",
+        "channel": "email",
+        "fname": "Seif",
+        "lname": "Amr"
+    },
+    {
+        "userName": "yasser",
+        "address": "mokkatem",
+        "email": "a@gmail.com",
+        "age": "21",
+        "phoneNumber": "01126724270",
+        "password": "Seif@amr123",
+        "channel": "email",
+        "fname": "Seifyasse",
+        "lname": "Amr"
     }
 ]
