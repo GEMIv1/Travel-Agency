@@ -1,10 +1,14 @@
 package com.example.Travel_agency.controllers;
 
+import com.example.Travel_agency.entities.booking;
 import com.example.Travel_agency.entities.hotel;
 import com.example.Travel_agency.interfaces.IBook;
+import com.example.Travel_agency.interfaces.IBookingRepository;
 import com.example.Travel_agency.interfaces.IHotelRepository;
 import com.example.Travel_agency.interfaces.ISearch;
+import com.example.Travel_agency.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +27,12 @@ public class bookingManagmentCtr {
     @Autowired
     private ISearch search;
     @Autowired
-    private IBook book;
+    private IBookingRepository bookingRepository;
+    @Autowired
+    private BookingService bookingService = new BookingService();
+
+//    @Autowired
+//    private IBook book;
     
 
 
@@ -58,13 +67,12 @@ public class bookingManagmentCtr {
             @RequestParam String roomType,
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate) {
-                /*
-                 * 
-                 * 
-                 * 
-                 * 
-                 */
 
+        List<booking> bookings= bookingRepository.getAllBookings();
+        if(bookingService.bookhotel(hotelName,roomType,startDate,endDate,bookings))
+        {
+
+        }
        
     }
 }
