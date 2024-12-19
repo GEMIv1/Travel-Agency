@@ -13,6 +13,20 @@
           "price": 100.0
         }
       ]
+    },{
+      "location":"Ain-Sokhna",
+      "name": "Grand Plaza Hotel",
+      "rooms": [
+        {
+          "type": "Deluxe",
+          "price": 150.0
+        
+        },
+        {
+          "type": "Standard",
+          "price": 100.0
+        }
+      ]
     },
     {
       "location":"Ain-Sokhna",

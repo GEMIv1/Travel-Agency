@@ -24,19 +24,35 @@ public class searchHotelService implements ISearch {
     Double minPrice,
     Double maxPrice) {
 
+    List<hotel> matchingHotels = new ArrayList<>();
+    List<hotel> filteredHotelsLocation = new ArrayList<>();
 
-     List<hotel> matchingHotels = new ArrayList<>();
+    if (location != null && !location.trim().isEmpty()) {
+        for (hotel h : searchHotels) {
+            if (h.getLocation().equalsIgnoreCase(location)) {
+                System.out.println("Adding hotel: " + h.getName() + " with location: " + h.getLocation());
+                filteredHotelsLocation.add(h);
+            }
+        }
+    } else {
+        filteredHotelsLocation = new ArrayList<>(searchHotels);
+    }
 
-     List<hotel> filteredHotelsLocation = searchHotels.stream()
-        .filter(h -> location == null || h.getLocation().trim().equalsIgnoreCase(location.trim()))
-        .collect(Collectors.toList());
-     
-
-     List<hotel> filteredHotels = filteredHotelsLocation.stream()
-        .filter(h -> hotelName == null || h.getName().equalsIgnoreCase(hotelName))
-        .collect(Collectors.toList());
-
-    
+    List<hotel> filteredHotelsName = new ArrayList<>();
+    if(filteredHotelsLocation.isEmpty()) { 
+        for (hotel h : searchHotels) {
+            if (h.getName().equalsIgnoreCase(hotelName)) {
+                System.out.println(h.getLocation());
+                filteredHotelsName.add(h);
+            }
+        }
+    } else {
+        for (hotel h : filteredHotelsLocation) {
+            if (h.getName().equalsIgnoreCase(hotelName)) {
+                filteredHotelsName.add(h);
+            }
+        }
+    }
 
     List<IRoomFilter> filters = new ArrayList<>();
     if (roomType != null && !roomType.isEmpty()) {
@@ -46,13 +62,13 @@ public class searchHotelService implements ISearch {
         filters.add(new RoomPriceFilter(minPrice, maxPrice)); 
     }
 
-    for (hotel h : filteredHotels) {
+    for (hotel h : filteredHotelsName) {
         List<room> filteredRooms = h.getRooms().stream()
             .filter(r -> filters.stream().allMatch(filter -> filter.matches(r)))
             .collect(Collectors.toList());
 
         if (!filteredRooms.isEmpty()) {
-            hotel filteredHotel = new hotel(h.getName(), filteredRooms, location);
+            hotel filteredHotel = new hotel(h.getName(), filteredRooms, h.getLocation());
             matchingHotels.add(filteredHotel);
         }
     }
@@ -61,8 +77,8 @@ public class searchHotelService implements ISearch {
         System.out.println("No hotels found matching the criteria.");
     }
 
-    return matchingHotels;
-    }
+    return matchingHotels.isEmpty() ? filteredHotelsLocation : matchingHotels;
+}
 
     
     
