@@ -6,5 +6,5 @@ import com.example.Travel_agency.entities.hotel;
 
 @Repository
 public interface IHotelRepository {
-    public List<hotel> getHotels(String hotel_name, Double minPrice, Double maxPrice, String roomType);
+    public List<hotel> getHotels(String hotel_name, Double minPrice, Double maxPrice, String roomType,String location);
 }

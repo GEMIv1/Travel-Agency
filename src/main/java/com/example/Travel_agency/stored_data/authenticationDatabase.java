@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.Travel_agency.entities.user;
 import com.example.Travel_agency.entities.userAuth;
 import com.example.Travel_agency.interfaces.IUserAuthRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -44,6 +45,22 @@ public class authenticationDatabase implements IUserAuthRepository{
             e.printStackTrace();
         }
         return userAuths;
+    }
+
+    @Override
+    public user getUserWithToken(String token, List<user> users) {
+        
+        List<userAuth> userAuths = getAllUserAuth();
+
+        for(userAuth u: userAuths){
+            if(u.getToken().equals(token)){
+                for(user i:users){
+                    if(i.getUserName().equals(u.getUsername()))
+                    return i;
+                }
+            }
+        }
+        return null;
     }
 
 }

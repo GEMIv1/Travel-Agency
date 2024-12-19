@@ -86,7 +86,7 @@ public class userManagmentCtr {
         
         user u;
         if(token != null){// reset password during the current login session 
-            u = restPass.perform(userRepository.getAllUsers(), username, oldPassword, userRepository, token);
+            u = restPass.perform(userRepository.getAllUsers(), username, oldPassword, userRepository, userAuthRepository, token);
         }
         else{// reset before logging in
             u = restPass.perform(userRepository.getAllUsers(),username,oldPassword,userRepository);

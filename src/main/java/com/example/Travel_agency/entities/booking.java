@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 public class booking {
+    private String location;
     private String hotelName;
     private String roomType;
     private Double price;
@@ -26,13 +27,14 @@ public class booking {
     }
 
     @JsonCreator
-    public booking(@JsonProperty("hotelName") String hotelName,@JsonProperty("roomType") String roomType,@JsonProperty("price") Double price,@JsonProperty("userBooked") String userBooked,@JsonProperty("startDate") LocalDate startDate,@JsonProperty("endDate") LocalDate endDate) {
+    public booking(@JsonProperty("hotelName") String hotelName,@JsonProperty("roomType") String roomType,@JsonProperty("price") Double price,@JsonProperty("userBooked") String userBooked,@JsonProperty("startDate") LocalDate startDate,@JsonProperty("endDate") LocalDate endDate, @JsonProperty("location") String location) {
         this.hotelName = hotelName;
         this.roomType = roomType;
         this.price = price;
         this.userBooked = userBooked;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.hotelName = location;
     }
 
     public String getHotelName() {
@@ -80,4 +82,14 @@ public class booking {
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
+
+    public void setStartDate(String location) {
+        this.location = location;
+    }
+
+    public String getLocation(){
+        return location;
+    }
+
+
 }

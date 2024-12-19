@@ -1,6 +1,5 @@
 package com.example.Travel_agency.services;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,17 +17,26 @@ import com.example.Travel_agency.services.room_filter.RoomTypeFilter;
 public class searchHotelService implements ISearch {
 
     public List<hotel> searchHotels(
+    String location,
     String hotelName,
     List<hotel> searchHotels,
     String roomType,
     Double minPrice,
-    Double maxPrice
-) {
+    Double maxPrice) {
+
+
      List<hotel> matchingHotels = new ArrayList<>();
 
-     List<hotel> filteredHotels = searchHotels.stream()
+     List<hotel> filteredHotelsLocation = searchHotels.stream()
+        .filter(h -> location == null || h.getLocation().trim().equalsIgnoreCase(location.trim()))
+        .collect(Collectors.toList());
+     
+
+     List<hotel> filteredHotels = filteredHotelsLocation.stream()
         .filter(h -> hotelName == null || h.getName().equalsIgnoreCase(hotelName))
         .collect(Collectors.toList());
+
+    
 
     List<IRoomFilter> filters = new ArrayList<>();
     if (roomType != null && !roomType.isEmpty()) {
@@ -44,7 +52,7 @@ public class searchHotelService implements ISearch {
             .collect(Collectors.toList());
 
         if (!filteredRooms.isEmpty()) {
-            hotel filteredHotel = new hotel(h.getName(), filteredRooms);
+            hotel filteredHotel = new hotel(h.getName(), filteredRooms, location);
             matchingHotels.add(filteredHotel);
         }
     }

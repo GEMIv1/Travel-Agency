@@ -20,5 +20,16 @@
         "channel": "email",
         "fname": "Seifyasse",
         "lname": "Amr"
+    },
+    {
+        "userName": "yassin",
+        "address": "mokkatem",
+        "email": "a@gmail.com",
+        "age": "8",
+        "phoneNumber": "12345612012",
+        "password": "94b5b0a5e65a4c58b271b902248fd605",
+        "channel": "email",
+        "fname": "Yassin",
+        "lname": "kamel"
     }
 ]

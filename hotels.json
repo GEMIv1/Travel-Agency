@@ -1,5 +1,6 @@
 [
     {
+      "location":"Sahel",
       "name": "Grand Plaza Hotel",
       "rooms": [
         {
@@ -14,6 +15,21 @@
       ]
     },
     {
+      "location":"Ain-Sokhna",
+      "name": "Beachside Resort",
+      "rooms": [
+        {
+          "type": "Suite",
+          "price": 200.0
+        },
+        {
+          "type": "Economy",
+          "price": 80.0
+        }
+      ]
+    },
+    {
+      "location":"Sahel",
       "name": "Beachside Resort",
       "rooms": [
         {

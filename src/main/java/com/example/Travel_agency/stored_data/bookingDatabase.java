@@ -18,10 +18,10 @@ public class bookingDatabase implements IBookingRepository {
     private final String path = "D:\\SDA_Project\\bookingData.json";
 
 
-    public boolean saveBooking(String hotel_name,String roomType, String username, LocalDate startDate, LocalDate endDate, double payAmount){
+    public boolean saveBooking(String hotel_name,String roomType, String username, LocalDate startDate, LocalDate endDate, double payAmount, String location){
 
         List<booking> bookings = getAllBookings();
-        bookings.add(new booking(hotel_name, roomType,payAmount, username, startDate, endDate));
+        bookings.add(new booking(hotel_name, roomType,payAmount, username, startDate, endDate, location));
 
         try {
             objectMapper.writeValue(new File(path), bookings);

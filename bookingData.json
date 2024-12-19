@@ -1,18 +1,53 @@
 [
     {
+        "location" :"Sahel",
         "hotelName": "Grand Plaza Hotel",
-        "roomType": "Deluxe",
-        "price": 150.0,
-        "userBooked": "seif",
+        "roomType": "Economy",
+        "price": 400.0,
+        "userBooked": "yassin",
         "startDate": [
             2024,
             12,
-            22
+            19
         ],
         "endDate": [
             2024,
             12,
-            23
+            24
+        ]
+    },
+    {
+        "location" :"Sahel",
+        "hotelName": "Grand Plaza Hotel",
+        "roomType": "Economy",
+        "price": 80.0,
+        "userBooked": "yassin",
+        "startDate": [
+            2024,
+            12,
+            18
+        ],
+        "endDate": [
+            2024,
+            12,
+            19
+        ]
+    },
+    {
+        "location" :"Sahel",
+        "hotelName": "Grand Plaza Hotel",
+        "roomType": "Economy",
+        "price": 160.0,
+        "userBooked": "yassin",
+        "startDate": [
+            2024,
+            12,
+            1
+        ],
+        "endDate": [
+            2024,
+            12,
+            3
         ]
     }
 ]

@@ -20,7 +20,7 @@ public class hotelDatabase implements IHotelRepository {
     private final String path = "D:\\SDA_Project\\hotels.json";
 
     @Override
-    public List<hotel> getHotels(String hotel_name, Double minPrice, Double maxPrice, String roomType) {
+    public List<hotel> getHotels(String hotel_name, Double minPrice, Double maxPrice, String roomType,String location) {
         List<hotel> hotels = new ArrayList<>();
         try{
             File file = new File(path);

@@ -3,6 +3,7 @@ package com.example.Travel_agency.services;
 import com.example.Travel_agency.entities.booking;
 import com.example.Travel_agency.entities.hotel;
 import com.example.Travel_agency.entities.room;
+import com.example.Travel_agency.interfaces.IBookingService;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -11,10 +12,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BookingService{
+public class BookingService implements IBookingService{
 
 
-    public double bookhotel(String hotelName, String roomType, LocalDate startDate, LocalDate endDate, List<booking> bookings, List<hotel> hotels) {
+    public double bookhotel(String hotelName, String roomType, LocalDate startDate, LocalDate endDate, List<booking> bookings, List<hotel> hotels, String location) {
         double totalPrice = 0.0;
     
         boolean isValidHotelName = false;
@@ -29,7 +30,7 @@ public class BookingService{
             boolean isDateAvailable = true;
     
             for (booking booking : bookings) {
-                if ((startDate.isBefore(booking.getEndDate()) && endDate.isAfter(booking.getStartDate()))) {
+                if (hotelName.equals(booking.getHotelName())&&(startDate.isBefore(booking.getEndDate()) && endDate.isAfter(booking.getStartDate()))) {
                     isDateAvailable = false;
                     break;
                 }
@@ -65,4 +66,6 @@ public class BookingService{
         long days = ChronoUnit.DAYS.between(start, end);
         return days * price;
     }
+
+
 }
