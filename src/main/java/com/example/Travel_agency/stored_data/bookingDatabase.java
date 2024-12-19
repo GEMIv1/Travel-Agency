@@ -15,12 +15,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class bookingDatabase implements IBookingRepository {
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String path = "SDA_Project\\bookingData.json";
+    private final String path = "D:\\SDA_Project\\bookingData.json";
 
 
-    public boolean book(String hotel_name,String roomType, String username, LocalDate startDate, LocalDate endDate, double payAmount){
+    public boolean saveBooking(String hotel_name,String roomType, String username, LocalDate startDate, LocalDate endDate, double payAmount){
 
-        List<booking> bookings =getAllBookings();
+        List<booking> bookings = getAllBookings();
         bookings.add(new booking(hotel_name, roomType,payAmount, username, startDate, endDate));
 
         try {
@@ -44,5 +44,6 @@ public class bookingDatabase implements IBookingRepository {
         }
         return bookings;
     }
+    
 
 }

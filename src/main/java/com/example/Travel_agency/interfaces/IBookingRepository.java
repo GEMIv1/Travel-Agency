@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IBookingRepository {
 
-    public boolean book(String hotel_name, String roomType, String username, LocalDate startDate, LocalDate endDate, double payAmount);
+    public boolean saveBooking(String hotel_name, String roomType, String username, LocalDate startDate, LocalDate endDate, double payAmount);
     public List<booking> getAllBookings();
 
 }

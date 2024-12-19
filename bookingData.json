@@ -1,0 +1,18 @@
+[
+    {
+        "hotelName": "Grand Plaza Hotel",
+        "roomType": "Deluxe",
+        "price": 150.0,
+        "userBooked": "seif",
+        "startDate": [
+            2024,
+            12,
+            22
+        ],
+        "endDate": [
+            2024,
+            12,
+            23
+        ]
+    }
+]

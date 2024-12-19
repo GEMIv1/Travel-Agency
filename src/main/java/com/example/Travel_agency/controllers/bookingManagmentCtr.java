@@ -2,11 +2,16 @@ package com.example.Travel_agency.controllers;
 
 import com.example.Travel_agency.entities.booking;
 import com.example.Travel_agency.entities.hotel;
+import com.example.Travel_agency.entities.room;
+import com.example.Travel_agency.entities.userAuth;
 import com.example.Travel_agency.interfaces.IBook;
 import com.example.Travel_agency.interfaces.IBookingRepository;
 import com.example.Travel_agency.interfaces.IHotelRepository;
 import com.example.Travel_agency.interfaces.ISearch;
+import com.example.Travel_agency.interfaces.IUserAuthRepository;
 import com.example.Travel_agency.services.BookingService;
+import com.example.Travel_agency.stored_data.authenticationDatabase;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +35,8 @@ public class bookingManagmentCtr {
     private IBookingRepository bookingRepository;
     @Autowired
     private BookingService bookingService = new BookingService();
+    @Autowired
+    private IUserAuthRepository authRepository;
 
 //    @Autowired
 //    private IBook book;
@@ -60,19 +67,37 @@ public class bookingManagmentCtr {
         return search.searchHotels(hotel_name,res,roomType, minPrice, maxPrice);
     }
 
-    // Book Hotel endpoint
     @PostMapping("/travel_agency/book_hotel")
-    public void bookHotel(
+    public boolean bookHotel(
+            @RequestParam String token,
             @RequestParam String hotelName,
             @RequestParam String roomType,
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate) {
-
-        List<booking> bookings= bookingRepository.getAllBookings();
-        if(bookingService.bookhotel(hotelName,roomType,startDate,endDate,bookings))
-        {
-
+        
+        boolean isAuthorized = false;
+        List<userAuth> userAuths = authRepository.getAllUserAuth();
+        String userToBook="";
+        for(userAuth u: userAuths){
+            if(u.getToken().equals(token)){
+                isAuthorized = true;
+                userToBook = u.getUsername();
+                break;
+            }
         }
-       
+        if(isAuthorized){
+            System.out.println(userToBook);
+            double payment = bookingService.bookhotel(hotelName,roomType,startDate,endDate,bookingRepository.getAllBookings(),hotelRepository.getHotels(hotelName, null, null, roomType));
+            System.out.println(payment);
+            if(payment!=0)
+            {
+                
+                bookingRepository.saveBooking(hotelName, roomType, userToBook, startDate, endDate, payment);
+                return true;
+            }
+            return false;
+        }
+        
+       return false;
     }
 }

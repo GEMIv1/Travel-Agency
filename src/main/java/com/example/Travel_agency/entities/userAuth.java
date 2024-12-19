@@ -1,12 +1,18 @@
 package com.example.Travel_agency.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class userAuth{
 
     String token;
     String username;
 
-    public userAuth(String token, String name){
+    public userAuth() {
+    }
+
+    @JsonCreator
+    public userAuth(@JsonProperty("token") String token,@JsonProperty("username")  String name){
         this.token = token;
         this.username = name;
     }

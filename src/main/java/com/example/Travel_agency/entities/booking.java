@@ -2,15 +2,31 @@ package com.example.Travel_agency.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 public class booking {
     private String hotelName;
     private String roomType;
     private Double price;
     private String userBooked;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate startDate;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate endDate;
 
-    public booking(String hotelName, String roomType, Double price, String userBooked, LocalDate startDate, LocalDate endDate) {
+    public booking(){
+        
+    }
+
+    @JsonCreator
+    public booking(@JsonProperty("hotelName") String hotelName,@JsonProperty("roomType") String roomType,@JsonProperty("price") Double price,@JsonProperty("userBooked") String userBooked,@JsonProperty("startDate") LocalDate startDate,@JsonProperty("endDate") LocalDate endDate) {
         this.hotelName = hotelName;
         this.roomType = roomType;
         this.price = price;
@@ -42,7 +58,6 @@ public class booking {
     public void setPrice(Double price) {
         this.price = price;
     }
-
     public LocalDate getEndDate() {
         return endDate;
     }
@@ -57,17 +72,12 @@ public class booking {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-
+    
     public LocalDate getStartDate() {
         return startDate;
     }
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
-    }
-    // violates S
-    public boolean overlaps(LocalDate start, LocalDate end) {
-        return (start.isBefore(endDate) || start.isEqual(endDate)) &&
-               (end.isAfter(startDate) || end.isEqual(startDate));
     }
 }

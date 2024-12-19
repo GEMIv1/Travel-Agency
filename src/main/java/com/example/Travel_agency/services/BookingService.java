@@ -1,36 +1,65 @@
 package com.example.Travel_agency.services;
 
 import com.example.Travel_agency.entities.booking;
+import com.example.Travel_agency.entities.hotel;
+import com.example.Travel_agency.entities.room;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.example.Travel_agency.interfaces.IBook;
 import org.springframework.stereotype.Service;
 
-public class BookingService  implements IBook {
+@Service
+public class BookingService{
 
 
-    // To search hotels
-
-
-    public boolean bookhotel(String hotelName, String roomType, LocalDate startDate, LocalDate endDate, List<booking> bookings) {
-
-        for (booking booking : bookings) {
-            if (!(startDate.isAfter(booking.getEndDate()) || endDate.isBefore(booking.getStartDate())))
-            {
-                return false;
+    public double bookhotel(String hotelName, String roomType, LocalDate startDate, LocalDate endDate, List<booking> bookings, List<hotel> hotels) {
+        double totalPrice = 0.0;
+    
+        boolean isValidHotelName = false;
+        for (hotel h : hotels) {
+            if (h.getName().equals(hotelName)) {
+                isValidHotelName = true;
+                break;
             }
         }
-
-        return true;
-
+    
+        if (isValidHotelName) {
+            boolean isDateAvailable = true;
+    
+            for (booking booking : bookings) {
+                if ((startDate.isBefore(booking.getEndDate()) && endDate.isAfter(booking.getStartDate()))) {
+                    isDateAvailable = false;
+                    break;
+                }
+            }
+    
+            if (isDateAvailable) {
+                boolean foundRoom = false;
+                double roomPrice = 0;
+    
+                for (hotel h : hotels) {
+                    for (room r : h.getRooms()) {
+                        if (r.getType().equals(roomType)) {
+                            roomPrice = r.getPrice();
+                            foundRoom = true;
+                            break;
+                        }
+                    }
+                    if (foundRoom) break;
+                }
+    
+                if (foundRoom) {
+                    totalPrice = calculatePrice(startDate, endDate, roomPrice);
+                }
+            }
+        }
+    
+        return totalPrice;
     }
-
-    private double calculatePrice(LocalDate startDate, LocalDate endDate, double price) {
+    
+    public double calculatePrice(LocalDate startDate, LocalDate endDate, double price) {
         LocalDate start = (startDate);
         LocalDate end = (endDate);
         long days = ChronoUnit.DAYS.between(start, end);
