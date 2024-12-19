@@ -1,0 +1,37 @@
+[
+  {
+    "event_name": "Cairo Jazz Festival",
+    "event_date": "2024-02-15",
+    "location": "Cairo",
+    "price": 200.0,
+    "category": "Music"
+  },
+  {
+    "event_name": "TechCrunch Cairo",
+    "event_date": "2024-03-10",
+    "location": "Cairo",
+    "price": 500.0,
+    "category": "Conference"
+  },
+  {
+    "event_name": "Alexandria Marathon",
+    "event_date": "2024-04-05",
+    "location": "Alexandria",
+    "price": 100.0,
+    "category": "Sports"
+  },
+  {
+    "event_name": "Giza Art Exhibit",
+    "event_date": "2024-05-20",
+    "location": "Giza",
+    "price": 150.0,
+    "category": "Art"
+  },
+  {
+    "event_name": "Aswan Film Festival",
+    "event_date": "2024-06-15",
+    "location": "Aswan",
+    "price": 250.0,
+    "category": "Film"
+  }
+]

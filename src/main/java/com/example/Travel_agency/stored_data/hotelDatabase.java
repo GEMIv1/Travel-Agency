@@ -17,7 +17,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 public class hotelDatabase implements IHotelRepository {
 
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    private final String path = "D:\\SDA_Project\\hotels.json";
+    private final String path = "C:\\Users\\ALRWOAD LAPTOB\\OneDrive\\Desktop\\Travel_agency1\\SDA_Project\\hotels.json";
 
     @Override
     public List<hotel> getHotels(String hotel_name, Double minPrice, Double maxPrice, String roomType,String location) {

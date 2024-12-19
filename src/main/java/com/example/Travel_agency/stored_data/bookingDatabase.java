@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class bookingDatabase implements IBookingRepository {
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String path = "D:\\SDA_Project\\bookingData.json";
+    private final String path = "C:\\Users\\ALRWOAD LAPTOB\\OneDrive\\Desktop\\Travel_agency1\\SDA_Project\\bookingData.json";
 
 
     public boolean saveBooking(String hotel_name,String roomType, String username, LocalDate startDate, LocalDate endDate, double payAmount, String location){

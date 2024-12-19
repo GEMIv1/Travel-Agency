@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class NotificationProducer extends Thread {
     private static final String FILE_PATH = "D:\\SDA_Project\\messageData.json";
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    public static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void run() {
