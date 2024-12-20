@@ -1,4 +1,4 @@
-package com.example.Travel_agency.notificationQueue;
+package com.example.Travel_agency.notificationSystem;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class NotificationProducer extends Thread {
                         System.out.println("No new messages or message is already sent.");
                     }
                 }
-                Thread.sleep(1000); 
+                Thread.sleep(5000); 
             } catch (IOException | InterruptedException e) {
                 System.out.println("Error reading messages from file: " + e.getMessage());
                 Thread.currentThread().interrupt();

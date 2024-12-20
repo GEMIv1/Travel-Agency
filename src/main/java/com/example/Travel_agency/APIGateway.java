@@ -1,12 +1,16 @@
 package com.example.Travel_agency;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Travel_agency.entities.event;
+import com.example.Travel_agency.entities.hotel;
 import com.example.Travel_agency.interfaces.controllers_interfaces.IEventManagmentCtr;
 import com.example.Travel_agency.interfaces.controllers_interfaces.IHotelManagmentCtr;
 import com.example.Travel_agency.interfaces.controllers_interfaces.IUserManagmentCtr;
@@ -45,14 +49,14 @@ public class APIGateway {
         return userManagmentCtr.ResetPassword(username, oldPassword, channelOverride, token);
     }
 
-    @PostMapping("/travel_agency/search_hotels")
-    public void searchHotels(
+    @GetMapping("/travel_agency/search_hotels")
+    public List<hotel> searchHotels(
             @RequestParam String location,
             @RequestParam(required = false) String hotel_name,
             @RequestParam(required = false) Double minPrice,
             @RequestParam(required = false) Double maxPrice,
             @RequestParam(required = false) String category) {
-        hotelManagmentCtr.searchHotels(location, hotel_name, minPrice, maxPrice, category);
+        return hotelManagmentCtr.searchHotels(location, hotel_name, minPrice, maxPrice, category);
     }
 
     @PostMapping("/travel_agency/book_hotel")
@@ -66,14 +70,14 @@ public class APIGateway {
         return hotelManagmentCtr.bookHotel(location, token, hotelName, roomType, startDate, endDate);
     }
 
-    @PostMapping("/travel_agency/search_events")
-    public void searchEvents(
+    @GetMapping("/travel_agency/search_events")
+    public List<event> searchEvents(
             @RequestParam(required = false) String event_name,
             @RequestParam(required = false) String event_date,
             @RequestParam(required = false) String location,
             @RequestParam(required = false) Double price,
             @RequestParam(required = false) String category) {
-        eventManagmentCtr.searchEvents(event_name, event_date, location, price, category);
+       return eventManagmentCtr.searchEvents(event_name, event_date, location, price, category);
     }
 
     @PostMapping("/travel_agency/book_event")

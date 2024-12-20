@@ -1,284 +1,44 @@
 [
     {
-        "channel": "email",
-        "content": "Dear: seif the account created successfully",
+        "channel": "sms",
+        "content": "Dear: MohamedYasser the account created successfully",
         "status": "SENT",
         "id": 1
     },
     {
         "channel": "email",
-        "content": "Dear: yasser the account created successfully",
+        "content": "Dear: GEMI the account created successfully",
         "status": "SENT",
         "id": 2
     },
     {
         "channel": "email",
-        "content": "Dear: seif new password is c0c5186b913f4180946e5b42b25469d1",
+        "content": "Dear: GEMI new password is 397495bae7dc48eda904bfa25034c414",
         "status": "SENT",
         "id": 3
     },
     {
         "channel": "email",
-        "content": "Dear: seif login done successfully",
+        "content": "Dear: GEMI login done successfully",
         "status": "SENT",
         "id": 4
     },
     {
         "channel": "email",
-        "content": "Dear: seif new password is a60f433ee5b14e43bc717b24019cccf9",
+        "content": "Dear: GEMI your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
         "status": "SENT",
         "id": 5
     },
     {
         "channel": "email",
-        "content": "Dear: yasser login done successfully",
-        "status": "NOTSENT",
+        "content": "Dear: GEMI your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
+        "status": "SENT",
         "id": 6
     },
     {
         "channel": "email",
-        "content": "Dear: yassin the account created successfully",
-        "status": "NOTSENT",
+        "content": "Dear: GEMI Recommendation: Aswan Film Festival is happening near your hotel at Aswan on 2025-03-26",
+        "status": "SENT",
         "id": 7
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin login done successfully",
-        "status": "NOTSENT",
-        "id": 8
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Economy is confirmed ",
-        "status": "NOTSENT",
-        "id": 9
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin new password is 94b5b0a5e65a4c58b271b902248fd605",
-        "status": "NOTSENT",
-        "id": 18
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Economy is confirmed ",
-        "status": "NOTSENT",
-        "id": 19
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Economy is confirmed ",
-        "status": "NOTSENT",
-        "id": 20
-    },
-    {
-        "channel": "email",
-        "content": "Dear yassin: your booking for Cairo Jazz Festival is done successfully ",
-        "status": "NOT SENT",
-        "id": 21
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 22
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 23
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 24
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 25
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 26
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 27
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 28
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 29
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 30
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 31
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 32
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 33
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 34
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 35
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 36
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 37
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 38
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 39
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 40
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 41
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 42
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 43
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 44
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 45
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 46
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 47
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 48
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 49
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassinRecommendation: Aswan Film Festival is happening near your hotel at Aswan",
-        "status": "NOT SENT",
-        "id": 50
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
-        "status": "NOTSENT",
-        "id": 51
-    },
-    {
-        "channel": "email",
-        "content": "Dear: yassin Recommendation: Aswan Film Festival is happening near your hotel at Aswan",
-        "status": "NOT SENT",
-        "id": 52
-    },
-    {
-        "channel": "sms",
-        "content": "Dear: AhmedKamel the account created successfully",
-        "status": "NOTSENT",
-        "id": 53
-    },
-    {
-        "channel": "sms",
-        "content": "Dear: AhmedKamel login done successfully",
-        "status": "NOTSENT",
-        "id": 54
-    },
-    {
-        "channel": "sms",
-        "content": "Dear: AhmedKamel new password is e38221f93cc24af0840f9bef99880d93",
-        "status": "NOTSENT",
-        "id": 55
     }
 ]

@@ -34,7 +34,7 @@ public class recommendation implements IRecommendationService {
                     !eventDate.isBefore(startDate) && 
                     !eventDate.isAfter(endDate)) {
                     
-                    return "Recommendation: " + event.getEvent_name() +
+                    return " Recommendation: " + event.getEvent_name() +
                            " is happening near your hotel at " + event.getLocation() +
                            " on " + event.getEvent_date();
                 }

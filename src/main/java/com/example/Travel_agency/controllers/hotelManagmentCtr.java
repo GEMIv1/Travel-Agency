@@ -5,6 +5,7 @@ import com.example.Travel_agency.entities.bookingHotel;
 import com.example.Travel_agency.entities.hotel;
 import com.example.Travel_agency.entities.message;
 import com.example.Travel_agency.entities.user;
+import com.example.Travel_agency.interfaces.controllers_interfaces.IHotelManagmentCtr;
 import com.example.Travel_agency.interfaces.event_related_interfaces.IEventRepository;
 import com.example.Travel_agency.interfaces.hotel_related_interfaces.IBookingHotelRepository;
 import com.example.Travel_agency.interfaces.hotel_related_interfaces.IBookingHotelService;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class hotelManagmentCtr {
+public class hotelManagmentCtr implements IHotelManagmentCtr {
 
 
     @Autowired
@@ -100,7 +101,7 @@ public class hotelManagmentCtr {
                 if(message.equals("No recommendations available") ) {
                     System.out.println("No recommendations available");
                 } else {
-                    messageRepository.saveMessage(new message(usr.getChannel(), "Dear: "+ usr.getUserName() + message , "NOT SENT"));;
+                    messageRepository.saveMessage(new message(usr.getChannel(), "Dear: "+ usr.getUserName() + message , "NOTSENT"));;
                 }
                 
                 return true;

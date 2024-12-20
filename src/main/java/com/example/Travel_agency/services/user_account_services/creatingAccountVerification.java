@@ -31,8 +31,9 @@ public class creatingAccountVerification implements ICreateAccountService{
         boolean isValidFname = true;
         boolean isValidLname = true;
         boolean isValidPassword = false;
-        Set<Character> specialChars = Set.of('@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '_', '=');
+        Set<Character> specialChars = Set.of('@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '_', '='); 
 
+        
 
         if(email.contains("@gmail.com")){            
             isValidEmail = true;
@@ -54,12 +55,18 @@ public class creatingAccountVerification implements ICreateAccountService{
             }
         }
 
-        for (char c : lastName.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                if(specialChars.contains(c)){
-                    isValidLname = false;
-                    break;
-                }                
+        if(phoneNumber.length()!=11){
+            isValidPhoneNumber = false;
+        }
+        
+        if(isValidPhoneNumber){
+            for (char c : lastName.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    if(specialChars.contains(c)){
+                        isValidLname = false;
+                        break;
+                    }                
+                }
             }
         }
 

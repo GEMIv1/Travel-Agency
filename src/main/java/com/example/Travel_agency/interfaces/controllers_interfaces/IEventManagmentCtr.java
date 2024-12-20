@@ -2,11 +2,10 @@ package com.example.Travel_agency.interfaces.controllers_interfaces;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Controller;
 import com.example.Travel_agency.entities.event;
 
-@Service
+@Controller
 public interface IEventManagmentCtr {
     public void bookEvent(
              String token,

@@ -1,4 +1,4 @@
-package com.example.Travel_agency.notificationQueue;
+package com.example.Travel_agency.notificationSystem;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

@@ -4,6 +4,7 @@ import com.example.Travel_agency.entities.bookingEvent;
 import com.example.Travel_agency.entities.event;
 import com.example.Travel_agency.entities.message;
 import com.example.Travel_agency.entities.user;
+import com.example.Travel_agency.interfaces.controllers_interfaces.IEventManagmentCtr;
 import com.example.Travel_agency.interfaces.event_related_interfaces.IBookingEventRepository;
 import com.example.Travel_agency.interfaces.event_related_interfaces.IBookingEventService;
 import com.example.Travel_agency.interfaces.event_related_interfaces.IEventRepository;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class eventManagmentCtr {
+public class eventManagmentCtr implements IEventManagmentCtr{
 
     @Autowired
     private ISearchEventService eventSearch;

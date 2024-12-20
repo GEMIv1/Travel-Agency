@@ -1,4 +1,4 @@
-package com.example.Travel_agency.notificationQueue;
+package com.example.Travel_agency.notificationSystem;
 
 import com.example.Travel_agency.entities.message;
 import com.example.Travel_agency.interfaces.message_related_interfaces.IMessageRepository;
@@ -25,10 +25,12 @@ public class NotificationConsumer extends Thread {
                 } else {
                     System.out.println("No message to process.");
                 }
+                Thread.sleep(5000); 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.out.println("Consumer thread interrupted.");
             }
+            
         }
     }
 
