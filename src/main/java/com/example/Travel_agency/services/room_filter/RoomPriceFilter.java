@@ -2,10 +2,10 @@ package com.example.Travel_agency.services.room_filter;
 
 
 import com.example.Travel_agency.entities.room;
-import com.example.Travel_agency.interfaces.IRoomFilter;
+import com.example.Travel_agency.interfaces.hotel_related_interfaces.IRoomFilterService;
 
 
-public class RoomPriceFilter implements IRoomFilter {
+public class RoomPriceFilter implements IRoomFilterService {
     private Double minPrice;
     private Double maxPrice;
 

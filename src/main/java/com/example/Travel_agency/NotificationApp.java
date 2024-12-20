@@ -1,8 +1,8 @@
 package com.example.Travel_agency;
 
+import com.example.Travel_agency.interfaces.message_related_interfaces.IMessageRepository;
 import com.example.Travel_agency.notificationQueue.NotificationConsumer;
 import com.example.Travel_agency.notificationQueue.NotificationProducer;
-import com.example.Travel_agency.interfaces.IMessageRepository;
 import com.example.Travel_agency.stored_data.messageDatabase;
 
 public class NotificationApp {

@@ -7,8 +7,8 @@
         "phoneNumber": "01126724270",
         "password": "a60f433ee5b14e43bc717b24019cccf9",
         "channel": "email",
-        "fname": "Seif",
-        "lname": "Amr"
+        "lname": "Amr",
+        "fname": "Seif"
     },
     {
         "userName": "yasser",
@@ -18,8 +18,8 @@
         "phoneNumber": "01126724270",
         "password": "Seif@amr123",
         "channel": "email",
-        "fname": "Seifyasse",
-        "lname": "Amr"
+        "lname": "Amr",
+        "fname": "Seifyasse"
     },
     {
         "userName": "yassin",
@@ -29,7 +29,18 @@
         "phoneNumber": "12345612012",
         "password": "94b5b0a5e65a4c58b271b902248fd605",
         "channel": "email",
-        "fname": "Yassin",
-        "lname": "kamel"
+        "lname": "kamel",
+        "fname": "Yassin"
+    },
+    {
+        "userName": "AhmedKamel",
+        "address": "mokkatem",
+        "email": "ahmed@gmail.com",
+        "age": "20",
+        "phoneNumber": "01126724270",
+        "password": "e38221f93cc24af0840f9bef99880d93",
+        "channel": "sms",
+        "lname": "kamel",
+        "fname": "Ahmed"
     }
 ]

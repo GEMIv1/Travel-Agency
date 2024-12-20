@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.example.Travel_agency.entities.message;
-import com.example.Travel_agency.interfaces.IMessageRepository;
+import com.example.Travel_agency.interfaces.message_related_interfaces.IMessageRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class messageDatabase implements IMessageRepository{
 
 
-    private String filePath = "C:\\Users\\ALRWOAD LAPTOB\\OneDrive\\Desktop\\Travel_agency1\\SDA_Project\\messageData.json";
+    private String filePath = "D:\\SDA_Project\\messageData.json";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 

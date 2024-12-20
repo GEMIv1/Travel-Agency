@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.Travel_agency.entities.user;
 import com.example.Travel_agency.entities.userAuth;
-import com.example.Travel_agency.interfaces.IUserAuthRepository;
+import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserAuthRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class authenticationDatabase implements IUserAuthRepository{
 
-    private final String path = "C:\\Users\\ALRWOAD LAPTOB\\OneDrive\\Desktop\\Travel_agency1\\SDA_Project\\userAuthentication.json";
+    private final String path = "D:\\SDA_Project\\userAuthentication.json";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override

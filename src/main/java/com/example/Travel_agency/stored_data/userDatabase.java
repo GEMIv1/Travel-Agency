@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.example.Travel_agency.entities.user;
-import com.example.Travel_agency.interfaces.IUserRepository;
+import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class userDatabase implements IUserRepository {
 
-    private final String  filePath = "C:\\Users\\ALRWOAD LAPTOB\\OneDrive\\Desktop\\Travel_agency1\\SDA_Project\\userData.jsons";
+    private final String  filePath = "D:\\SDA_Project\\userData.json";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 

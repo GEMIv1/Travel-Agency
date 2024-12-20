@@ -1,0 +1,19 @@
+[
+    {
+        "hotelName": "Grand Plaza Hotel",
+        "roomType": "Deluxe",
+        "userBooked": "yassin",
+        "startDate": [
+            2025,
+            1,
+            25
+        ],
+        "endDate": [
+            2025,
+            2,
+            25
+        ],
+        "price": 4650.0,
+        "location": "Aswan"
+    }
+]
