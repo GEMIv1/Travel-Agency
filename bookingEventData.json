@@ -8,5 +8,15 @@
             "category": "Music"
         },
         "userBooked": "yassin"
+    },
+    {
+        "eventBooked": {
+            "event_name": "Cairo Jazz Festival",
+            "event_date": "2024-02-15",
+            "location": "Cairo",
+            "price": 200.0,
+            "category": "Music"
+        },
+        "userBooked": "AhmedMohamedKamel"
     }
 ]

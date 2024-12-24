@@ -2,40 +2,45 @@ package com.example.Travel_agency.controllers;
 
 
 import com.example.Travel_agency.entities.bookingHotel;
+import com.example.Travel_agency.entities.event;
 import com.example.Travel_agency.entities.hotel;
 import com.example.Travel_agency.entities.message;
 import com.example.Travel_agency.entities.user;
+import com.example.Travel_agency.interfaces.IBookingRepository;
+import com.example.Travel_agency.interfaces.IExternalRepository;
+import com.example.Travel_agency.interfaces.IMessageRepository;
+import com.example.Travel_agency.interfaces.IService;
+import com.example.Travel_agency.interfaces.IUserAuthRepository;
+import com.example.Travel_agency.interfaces.IUserRepository;
 import com.example.Travel_agency.interfaces.controllers_interfaces.IHotelManagmentCtr;
-import com.example.Travel_agency.interfaces.event_related_interfaces.IEventRepository;
-import com.example.Travel_agency.interfaces.hotel_related_interfaces.IBookingHotelRepository;
-import com.example.Travel_agency.interfaces.hotel_related_interfaces.IBookingHotelService;
-import com.example.Travel_agency.interfaces.hotel_related_interfaces.IHotelRepository;
-import com.example.Travel_agency.interfaces.hotel_related_interfaces.ISearchHotelService;
-import com.example.Travel_agency.interfaces.message_related_interfaces.IMessageRepository;
-import com.example.Travel_agency.interfaces.recommendation_related_interfaces.IRecommendationService;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserAuthRepository;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class hotelManagmentCtr implements IHotelManagmentCtr {
 
 
     @Autowired
-    private IHotelRepository hotelRepository;
+    @Qualifier("hotelDatabase")
+    private IExternalRepository<hotel> hotelRepository;
     @Autowired
-    private ISearchHotelService search;
+    @Qualifier("searchHotelService")
+    private IService search;
     @Autowired
-    private IBookingHotelRepository bookingRepository;
+    @Qualifier("bookingHotelDatabase")
+    private IBookingRepository<bookingHotel> bookingRepository;
     @Autowired
-    private IBookingHotelService bookingService;
+    @Qualifier("bookHotel")
+    private IService bookingService;
     @Autowired
     private IUserAuthRepository authRepository;
     @Autowired
@@ -43,9 +48,11 @@ public class hotelManagmentCtr implements IHotelManagmentCtr {
     @Autowired
     private IUserRepository userRepository;
     @Autowired
-    private IRecommendationService recommendation;
+    @Qualifier("recommendation")
+    private IService recommendation;
     @Autowired
-    private IEventRepository eventRepository;
+    @Qualifier("eventDatabase")
+    private IExternalRepository <event> eventRepository;
 
     
 
@@ -66,14 +73,22 @@ public class hotelManagmentCtr implements IHotelManagmentCtr {
                 System.out.println("Room Type: " + roomType);
 
                 
-        List<hotel> res = hotelRepository.getHotels();
+        List<hotel> res = hotelRepository.getAll();
 
         if (res == null || res.isEmpty()) {
             System.out.println("No hotels found.");
             return new ArrayList<>();
         }
+        Map<String, Object> paramsSearch = new HashMap<>();
+        paramsSearch.put("location", location);
+        paramsSearch.put("hotel_name", hotel_name);
+        paramsSearch.put("minPrice", minPrice);
+        paramsSearch.put("maxPrice", maxPrice);
+        paramsSearch.put("roomType", roomType);
+        paramsSearch.put("hotels", res);
+
         
-        return search.searchHotels(location, hotel_name,res,roomType, minPrice, maxPrice);
+        return (List<hotel>) search.performOperation("searchHotels", paramsSearch);
     }
 
     public boolean bookHotel(
@@ -91,13 +106,28 @@ public class hotelManagmentCtr implements IHotelManagmentCtr {
         
         if(usr != null){
             System.out.println(usr.getUserName());
-            double payment = bookingService.bookhotel(hotelName,roomType,startDate,endDate,bookingRepository.getAllBookings(),hotelRepository.getHotels(),location);
+            Map<String, Object> paramsBooking = new HashMap<>();
+            paramsBooking.put("location", location);
+            paramsBooking.put("hotelName", hotelName);
+            paramsBooking.put("roomType", roomType);
+            paramsBooking.put("startDate", startDate);
+            paramsBooking.put("endDate", endDate);
+            paramsBooking.put("bookings", bookingRepository.getAll());
+            paramsBooking.put("hotels", hotelRepository.getAll());
+            
+            double payment = (double)bookingService.performOperation("bookHotel", paramsBooking);
             System.out.println(payment);
             if(payment!=0)
             {   
                 messageRepository.saveMessage(new message(usr.getChannel(), "Dear: " + usr.getUserName() + " your booking of the  "+  hotelName + ", room type: " + roomType +" is confirmed ", "NOTSENT"));
-                bookingRepository.saveBooking(new bookingHotel(hotelName,roomType,usr.getUserName(),startDate,endDate,payment,location));
-                String message = recommendation.recommend(bookingRepository.getAllBookings(),eventRepository.getEvents());
+                bookingRepository.save(new bookingHotel(hotelName,roomType,usr.getUserName(),startDate,endDate,payment,location));
+
+                Map<String, Object> paramsRecommendation = new HashMap<>();
+                paramsRecommendation.put("bookings", bookingRepository.getAll());
+                paramsRecommendation.put("events", eventRepository.getAll());
+
+
+                String message = (String) recommendation.performOperation("recommend", paramsRecommendation);
                 if(message.equals("No recommendations available") ) {
                     System.out.println("No recommendations available");
                 } else {

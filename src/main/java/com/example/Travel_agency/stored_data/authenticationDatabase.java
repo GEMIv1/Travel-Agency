@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.Travel_agency.entities.user;
 import com.example.Travel_agency.entities.userAuth;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserAuthRepository;
+import com.example.Travel_agency.interfaces.IUserAuthRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -62,5 +62,21 @@ public class authenticationDatabase implements IUserAuthRepository{
         }
         return null;
     }
+
+    @Override
+    public void deleteUserAuth(String token) {
+        List<userAuth> userAuths = getAllUserAuth();
+        for(userAuth u: userAuths){
+            if(u.getToken().equals(token)){
+                userAuths.remove(u);
+                break;
+            }
+        }
+        try {
+            objectMapper.writeValue(new File(path), userAuths);
+        } catch (IOException e) {
+            e.printStackTrace();
+    }
+}
 
 }

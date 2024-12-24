@@ -1,8 +1,11 @@
 package com.example.Travel_agency.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,30 +13,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.Travel_agency.entities.message;
 import com.example.Travel_agency.entities.user;
 import com.example.Travel_agency.entities.userAuth;
+import com.example.Travel_agency.interfaces.IMessageRepository;
+import com.example.Travel_agency.interfaces.IService;
+import com.example.Travel_agency.interfaces.IUserAuthRepository;
+import com.example.Travel_agency.interfaces.IUserRepository;
 import com.example.Travel_agency.interfaces.controllers_interfaces.IUserManagmentCtr;
-import com.example.Travel_agency.interfaces.message_related_interfaces.IMessageRepository;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.ICreateAccountService;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.ILoginService;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IResetPasswordService;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserAuthRepository;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserRepository;
 
 @Controller
 public class userManagmentCtr implements IUserManagmentCtr{
 
 
-    @Autowired
-    private ICreateAccountService createAccount;
-    @Autowired
-    private ILoginService login;
     @Autowired 
     private IUserRepository userRepository;
-    @Autowired
-    private IResetPasswordService restPass;
     @Autowired
     private IMessageRepository messageRepository;
     @Autowired
     private IUserAuthRepository userAuthRepository;
+    @Autowired
+    @Qualifier("resetPasswordVerification")
+    private IService resetPasswordService;
+
+    @Autowired
+    @Qualifier("loginVerification")
+    private IService loginVerificationService;
+
+    @Autowired
+    @Qualifier("creatingAccountVerification")
+    private IService createAccountService;
 
     
     public void setUserDetails(
@@ -57,9 +63,14 @@ public class userManagmentCtr implements IUserManagmentCtr{
         u.setPassword(password);
         u.setUserName(username);
         u.setChannel(channel);
+
+        Map<String, Object> paramsCreateAccount = new HashMap<>();
+        paramsCreateAccount.put("users", userRepository.getAllUsers());
+        paramsCreateAccount.put("user", u);
+        boolean isCreated = (boolean) createAccountService.performOperation("createAccount", paramsCreateAccount);
         
         
-        if(createAccount.perform(u,userRepository.getAllUsers())){
+        if(isCreated){
             userRepository.saveUser(u);
             messageRepository.saveMessage(new message(channel, "Dear: " + username + " the account created successfully", "NOTSENT"));
             System.out.println("User added");
@@ -69,9 +80,15 @@ public class userManagmentCtr implements IUserManagmentCtr{
     }
 
     
-    public boolean loginVerification( String username,  String password){ 
+    public boolean loginVerification(String username,  String password){ 
+
+        Map<String, Object> paramsLogin = new HashMap<>();
+        paramsLogin.put("users", userRepository.getAllUsers());
+        paramsLogin.put("username", username);
+        paramsLogin.put("password", password);
+
         
-        user u = login.perform(userRepository.getAllUsers(),username,password);
+        user u = (user) loginVerificationService.performOperation("login",paramsLogin);
 
         if(u != null){
             String newToken = UUID.randomUUID().toString();
@@ -82,15 +99,18 @@ public class userManagmentCtr implements IUserManagmentCtr{
         return false;
     }
     
-    public boolean ResetPassword( String username,  String oldPassword,  String channelOverride,  String token){
+    public boolean ResetPassword( String username,  String oldPassword,  String channelOverride){
+        Map<String, Object> paramsResetPassword = new HashMap<>();
+        paramsResetPassword.put("allUsers", userRepository.getAllUsers());
+        paramsResetPassword.put("username", username);
+        paramsResetPassword.put("oldPassword", oldPassword);
+        paramsResetPassword.put("userRepository", userRepository);
+        paramsResetPassword.put("authRepository", userAuthRepository);
+
+       
+       
+        user u = (user) resetPasswordService.performOperation("resetPassword", paramsResetPassword);
         
-        user u;
-        if(token != null){// reset password during the current login session 
-            u = restPass.perform(userRepository.getAllUsers(), username, oldPassword, userRepository, userAuthRepository, token);
-        }
-        else{// reset before logging in
-            u = restPass.perform(userRepository.getAllUsers(),username,oldPassword,userRepository);
-        }
         
 
         if(u!=null){

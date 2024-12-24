@@ -1,7 +1,7 @@
 package com.example.Travel_agency.notificationSystem;
 
 import com.example.Travel_agency.entities.message;
-import com.example.Travel_agency.interfaces.message_related_interfaces.IMessageRepository;
+import com.example.Travel_agency.interfaces.IMessageRepository;
 
 public class NotificationConsumer extends Thread {
     private final IMessageRepository messageRepository;

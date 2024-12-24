@@ -1,17 +1,34 @@
 package com.example.Travel_agency.services.user_account_services;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.example.Travel_agency.entities.user;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.ILoginService;
+import com.example.Travel_agency.interfaces.IService;
 
-@Service
-public class loginVerification implements ILoginService{
-    
+@Service("loginVerification")
+public class loginVerification implements IService {
+
     @Override
-    public user perform(List<user> users, String username, String password){
+    public Object performOperation(String operationType, Map<String, Object> params) {
+        if (!"login".equals(operationType)) {
+            throw new UnsupportedOperationException("Unsupported operation: " + operationType);
+        }
+
+        List<user> users = (List<user>) params.get("users");
+        String username = (String) params.get("username");
+        String password = (String) params.get("password");
+
+        return login(users, username, password);
+
+
+    }
+
+
+    
+    public user login(List<user> users, String username, String password){
         boolean isCorrectPassword = false;
         boolean isCorrectUsername = false;
         for(user u: users){

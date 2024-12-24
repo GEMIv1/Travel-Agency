@@ -1,19 +1,48 @@
 package com.example.Travel_agency.services.user_account_services;
 import java.util.List;
+import java.util.Map;
+
 import com.example.Travel_agency.entities.user;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IResetPasswordService;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserAuthRepository;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserRepository;
+import com.example.Travel_agency.interfaces.IService;
+import com.example.Travel_agency.interfaces.IUserAuthRepository;
+import com.example.Travel_agency.interfaces.IUserRepository;
 
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-@Service
-public class resetPasswordVerification implements IResetPasswordService{
+@Service("resetPasswordVerification")
+public class resetPasswordVerification implements IService{
 
     @Override
-    public user perform(List<user> allUsers, String username, String oldPassword, IUserRepository userRepository,IUserAuthRepository authRepository, String token) {
+    public Object performOperation(String operationType, Map<String, Object> params) {
+
+        if (!"resetPassword".equals(operationType)) {
+            throw new UnsupportedOperationException("Unsupported operation: " + operationType);
+        }
+        List<user> allUsers = (List<user>) params.get("allUsers");
+        String username = (String) params.get("username");
+        String oldPassword = (String) params.get("oldPassword");
+        String token = (String) params.get("token");
+        IUserRepository userRepository = (IUserRepository) params.get("userRepository");
+        IUserAuthRepository authRepository = (IUserAuthRepository) params.get("authRepository");
+
+
+
+        if (token != null) {
+            return resetLoggedIn(allUsers, username, oldPassword,userRepository, authRepository, token);
+        } else {
+            return resetPasswordNotLoggedIn(allUsers, username, oldPassword, userRepository);
+        }
+
+    }
+
+    
+    
+    
+    
+    
+    public user resetLoggedIn(List<user> allUsers, String username, String oldPassword, IUserRepository userRepository,IUserAuthRepository authRepository, String token) {
         
         String guid = UUID.randomUUID().toString().replace("-", "");
 
@@ -37,9 +66,8 @@ public class resetPasswordVerification implements IResetPasswordService{
         return null;
     }
 
-    @Override
-    public user perform(List<user> allUsers, String username, String oldPassword, IUserRepository userRepository) {
-        return perform(allUsers, username, oldPassword, userRepository,null, null);
+    public user resetPasswordNotLoggedIn(List<user> allUsers, String username, String oldPassword, IUserRepository userRepository) {
+        return resetLoggedIn(allUsers, username, oldPassword, userRepository,null, null);
     }
     
 }

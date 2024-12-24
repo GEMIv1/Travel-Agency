@@ -1,24 +1,30 @@
 package com.example.Travel_agency.services.room_filter;
 
-
 import com.example.Travel_agency.entities.room;
-import com.example.Travel_agency.interfaces.hotel_related_interfaces.IRoomFilterService;
+import com.example.Travel_agency.interfaces.IService;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class RoomPriceFilter implements IRoomFilterService {
-    private Double minPrice;
-    private Double maxPrice;
-
-    public RoomPriceFilter(Double minPrice, Double maxPrice) {
-        this.minPrice = minPrice;
-        this.maxPrice = maxPrice;
-    }
+public class RoomPriceFilter implements IService {
 
     @Override
-    public boolean matches(room r) {
-        
-        return (minPrice == null || r.getPrice() >= minPrice) &&
-               (maxPrice == null || r.getPrice() <= maxPrice);
-    }
+    public Object performOperation(String operationType, Map<String, Object> params) {
+        if (!"filterByPrice".equalsIgnoreCase(operationType)) {
+            throw new IllegalArgumentException("Invalid operation type for RoomPriceFilter");
+        }
 
+        Double minPrice = (Double) params.getOrDefault("minPrice", Double.MIN_VALUE);
+        Double maxPrice = (Double) params.getOrDefault("maxPrice", Double.MAX_VALUE);
+        List<room> rooms = (List<room>) params.get("rooms");
+
+        if (rooms == null) {
+            throw new IllegalArgumentException("The parameter 'rooms' is missing or invalid.");
+        }
+
+        return rooms.stream()
+                .filter(r -> r.getPrice() >= minPrice && r.getPrice() <= maxPrice)
+                .collect(Collectors.toList());
+    }
 }

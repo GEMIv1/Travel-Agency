@@ -1,6 +1,6 @@
 package com.example.Travel_agency;
 
-import com.example.Travel_agency.interfaces.message_related_interfaces.IMessageRepository;
+import com.example.Travel_agency.interfaces.IMessageRepository;
 import com.example.Travel_agency.notificationSystem.NotificationConsumer;
 import com.example.Travel_agency.notificationSystem.NotificationProducer;
 import com.example.Travel_agency.notificationSystem.NotificationStat;

@@ -4,16 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.example.Travel_agency.entities.bookingHotel;
-import com.example.Travel_agency.interfaces.recommendation_related_interfaces.IRecommendationService;
+import com.example.Travel_agency.interfaces.IService;
 import com.example.Travel_agency.entities.event;
 
-@Service
-public class recommendation implements IRecommendationService {
-    @Override
+@Service("recommendation")
+public class recommendation implements IService {
+
     public String recommend(List<bookingHotel> bookings, List<event> events) {
         Set<String> bookingLocations = new HashSet<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -42,5 +44,18 @@ public class recommendation implements IRecommendationService {
         }
 
         return "No recommendations available";
+    }
+
+    @Override
+    public Object performOperation(String operationType, Map<String, Object> params) {
+        
+        if (!"recommend".equals(operationType)) {
+            throw new UnsupportedOperationException("Unsupported operation: " + operationType);
+        }
+
+        List<bookingHotel> bookings = (List<bookingHotel>) params.get("bookings");
+        List<event> events = (List<event>) params.get("events");
+
+        return recommend(bookings, events);
     }
 }

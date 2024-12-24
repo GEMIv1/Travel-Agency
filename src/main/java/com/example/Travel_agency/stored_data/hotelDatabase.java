@@ -8,19 +8,19 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.Travel_agency.entities.hotel;
-import com.example.Travel_agency.interfaces.hotel_related_interfaces.IHotelRepository;
+import com.example.Travel_agency.interfaces.IExternalRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-@Service
-public class hotelDatabase implements IHotelRepository {
+@Service("hotelDatabase")
+public class hotelDatabase implements IExternalRepository<hotel>{
 
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
     private final String path = "D:\\SDA_Project\\hotelData.json";
 
     @Override
-    public List<hotel> getHotels() {
+    public List<hotel> getAll() {
         List<hotel> hotels = new ArrayList<>();
         try{
             File file = new File(path);

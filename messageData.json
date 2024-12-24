@@ -40,5 +40,47 @@
         "content": "Dear: GEMI Recommendation: Aswan Film Festival is happening near your hotel at Aswan on 2025-03-26",
         "status": "SENT",
         "id": 7
+    },
+    {
+        "channel": "email",
+        "content": "Dear: AhmedMohamedKamel the account created successfully",
+        "status": "NOTSENT",
+        "id": 8
+    },
+    {
+        "channel": "email",
+        "content": "Dear: AhmedMohamedKamel login done successfully",
+        "status": "NOTSENT",
+        "id": 9
+    },
+    {
+        "channel": "email",
+        "content": "Dear: AhmedMohamedKamel new password is 53b04fca94974cdcbfdb76ef373fb754",
+        "status": "NOTSENT",
+        "id": 10
+    },
+    {
+        "channel": "email",
+        "content": "Dear: AhmedMohamedKamel new password is b613e3eba732452cabfe11da52ac15a3",
+        "status": "NOTSENT",
+        "id": 11
+    },
+    {
+        "channel": "email",
+        "content": "Dear: GEMI your booking of the  Grand Plaza Hotel, room type: Deluxe is confirmed ",
+        "status": "NOTSENT",
+        "id": 12
+    },
+    {
+        "channel": "email",
+        "content": "Dear: GEMI Recommendation: Aswan Film Festival is happening near your hotel at Aswan on 2025-03-26",
+        "status": "NOTSENT",
+        "id": 13
+    },
+    {
+        "channel": "email",
+        "content": "Dear AhmedMohamedKamel: your booking for Cairo Jazz Festival is done successfully ",
+        "status": "NOT SENT",
+        "id": 14
     }
 ]

@@ -1,7 +1,8 @@
 package com.example.Travel_agency.stored_data;
 
 import com.example.Travel_agency.entities.event;
-import com.example.Travel_agency.interfaces.event_related_interfaces.IEventRepository;
+import com.example.Travel_agency.interfaces.IExternalRepository;
+//import com.example.Travel_agency.interfaces.event_related_interfaces.IEventRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class eventDatabase implements IEventRepository {
+@Service("eventDatabase")
+public class eventDatabase implements IExternalRepository<event>{
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final String path = "D:\\SDA_Project\\eventData.json";
@@ -20,7 +21,7 @@ public class eventDatabase implements IEventRepository {
         
 
     @Override
-    public List<event> getEvents() {
+    public List<event> getAll() {
         List<event> events = new ArrayList<>();
         try {
             File file = new File(path);

@@ -15,6 +15,6 @@ public interface IUserManagmentCtr {
          String password,
          String channel);
     public boolean loginVerification( String username,  String password);
-    public boolean ResetPassword( String username,  String oldPassword,  String channelOverride,  String token);
+    public boolean ResetPassword( String username,  String oldPassword,  String channelOverride);
 
 }

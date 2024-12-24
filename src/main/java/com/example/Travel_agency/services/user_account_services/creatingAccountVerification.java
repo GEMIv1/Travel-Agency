@@ -1,18 +1,30 @@
 package com.example.Travel_agency.services.user_account_services;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.example.Travel_agency.entities.user;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.ICreateAccountService;
+import com.example.Travel_agency.interfaces.IService;
 
-@Service
-public class creatingAccountVerification implements ICreateAccountService{
-    
+@Service("creatingAccountVerification")
+public class creatingAccountVerification implements IService {
 
     @Override
-    public boolean perform(user u, List<user> users){
+    public Object performOperation(String operationType, Map<String, Object> params) {
+        if (!"createAccount".equals(operationType)) {
+            throw new UnsupportedOperationException("Unsupported operation: " + operationType);
+        }
+
+        user newUser = (user) params.get("user");
+        List<user> users = (List<user>) params.get("users");
+        return createAccount(newUser, users);
+    }
+    
+
+    
+    public boolean createAccount(user u, List<user> users){
 
         for(user user: users){
             if(user.getUserName().equals(u.getUserName())){

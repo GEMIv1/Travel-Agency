@@ -3,18 +3,18 @@ package com.example.Travel_agency.services.hotel_services;
 import com.example.Travel_agency.entities.bookingHotel;
 import com.example.Travel_agency.entities.hotel;
 import com.example.Travel_agency.entities.room;
-import com.example.Travel_agency.interfaces.hotel_related_interfaces.IBookingHotelService;
+import com.example.Travel_agency.interfaces.IService;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-@Service
-public class bookHotel implements IBookingHotelService{
+@Service("bookHotel")
+public class bookHotel implements IService{
 
 
-    @Override
     public double bookhotel(String hotelName, String roomType, LocalDate startDate, LocalDate endDate, List<bookingHotel> bookings, List<hotel> hotels, String location) {
         double totalPrice = 0.0;
     
@@ -60,12 +60,29 @@ public class bookHotel implements IBookingHotelService{
         return totalPrice;
     }
     
-    @Override
     public double calculatePrice(LocalDate startDate, LocalDate endDate, double price) {
         LocalDate start = (startDate);
         LocalDate end = (endDate);
         long days = ChronoUnit.DAYS.between(start, end);
         return days * price;
+    }
+
+    @Override
+    public Object performOperation(String operationType, Map<String, Object> params) {
+
+        if (!"bookHotel".equals(operationType)) {
+            throw new UnsupportedOperationException("Unsupported operation: " + operationType);
+        }
+
+        String hotelName = (String) params.get("hotelName");
+        String roomType = (String) params.get("roomType");
+        LocalDate startDate = (LocalDate) params.get("startDate");
+        LocalDate endDate = (LocalDate) params.get("endDate");
+        List<bookingHotel> bookings = (List<bookingHotel>) params.get("bookings");
+        List<hotel> hotels = (List<hotel>) params.get("hotels");
+        String location = (String) params.get("location");
+
+        return bookhotel(hotelName, roomType, startDate, endDate, bookings, hotels, location);
     }
 
 

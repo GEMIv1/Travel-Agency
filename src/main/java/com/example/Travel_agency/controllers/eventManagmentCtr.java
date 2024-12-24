@@ -4,33 +4,42 @@ import com.example.Travel_agency.entities.bookingEvent;
 import com.example.Travel_agency.entities.event;
 import com.example.Travel_agency.entities.message;
 import com.example.Travel_agency.entities.user;
+import com.example.Travel_agency.interfaces.IBookingRepository;
+import com.example.Travel_agency.interfaces.IExternalRepository;
+import com.example.Travel_agency.interfaces.IMessageRepository;
+import com.example.Travel_agency.interfaces.IService;
+import com.example.Travel_agency.interfaces.IUserAuthRepository;
+import com.example.Travel_agency.interfaces.IUserRepository;
 import com.example.Travel_agency.interfaces.controllers_interfaces.IEventManagmentCtr;
-import com.example.Travel_agency.interfaces.event_related_interfaces.IBookingEventRepository;
-import com.example.Travel_agency.interfaces.event_related_interfaces.IBookingEventService;
-import com.example.Travel_agency.interfaces.event_related_interfaces.IEventRepository;
-import com.example.Travel_agency.interfaces.event_related_interfaces.ISearchEventService;
-import com.example.Travel_agency.interfaces.message_related_interfaces.IMessageRepository;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserAuthRepository;
-import com.example.Travel_agency.interfaces.user_account_related_interfaces.IUserRepository;
+import com.example.Travel_agency.services.hotel_services.bookHotel;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class eventManagmentCtr implements IEventManagmentCtr{
 
     @Autowired
-    private ISearchEventService eventSearch;
+    @Qualifier("searchEventService")
+    private IService eventSearch;
     @Autowired
-    private IEventRepository eventRepository;
+    @Qualifier("eventDatabase")
+    private IExternalRepository<event> eventRepository;
     @Autowired
-    private IBookingEventService bookingEventService;
+    @Qualifier("bookEvent")
+    private IService bookingEventService;
     @Autowired
     private IUserAuthRepository authRepository;
     @Autowired
     private IUserRepository userRepository;
     @Autowired
-    private IBookingEventRepository bookingRepository;
+    @Qualifier("bookingEventDataBase")
+    private IBookingRepository<bookingEvent> bookingRepository;
     @Autowired
     private IMessageRepository messageRepository;
 
@@ -41,9 +50,18 @@ public class eventManagmentCtr implements IEventManagmentCtr{
              String location,
              Double price,
              String category) {
+            
+            Map<String, Object> params = new HashMap<>();
+            params.put("eventName", event_name);
+            params.put("eventDate", event_date);
+            params.put("location", location);
+            params.put("price", price);
+            params.put("category", category);
+            params.put("events", eventRepository.getAll());
 
 
-        return eventSearch.searchEvents(event_name, event_date, location, price, category, eventRepository.getEvents());
+
+        return (List<event>)eventSearch.performOperation("searchEvent", params);
     }
 
     public void bookEvent(
@@ -52,9 +70,14 @@ public class eventManagmentCtr implements IEventManagmentCtr{
 
 
         user usr  = authRepository.getUserWithToken(token, userRepository.getAllUsers());
-        event evt = bookingEventService.bookingEventService(eventName, eventRepository.getEvents());
+
+        Map<String, Object> paramsBookingEventService = new HashMap<>();
+        paramsBookingEventService.put("eventName", eventName);
+        paramsBookingEventService.put("events", eventRepository.getAll());
+
+        event evt = (event)bookingEventService.performOperation("bookEvent", paramsBookingEventService);
         if(evt != null){
-            bookingRepository.saveBooking(new bookingEvent(usr.getUserName(), evt));
+            bookingRepository.save(new bookingEvent(usr.getUserName(), evt));
             messageRepository.saveMessage(new message(usr.getChannel(),"Dear "+usr.getUserName()+": your booking for " +eventName+" is done successfully ","NOT SENT" ));
 
         }

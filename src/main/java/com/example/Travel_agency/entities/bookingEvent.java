@@ -4,6 +4,9 @@ public class bookingEvent {
     private event eventBooked;
     private String userBooked;
 
+    public bookingEvent() {
+    }
+
     public bookingEvent(String userBooked, event eventBooked){
         this.userBooked = userBooked;
         this.eventBooked = eventBooked;
