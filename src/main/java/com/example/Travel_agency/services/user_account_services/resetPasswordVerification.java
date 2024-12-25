@@ -32,7 +32,7 @@ public class resetPasswordVerification implements IService{
         if (token != null) {
             return resetLoggedIn(allUsers, username, oldPassword,userRepository, authRepository, token);
         } else {
-            return resetPasswordNotLoggedIn(allUsers, username, oldPassword, userRepository);
+            return resetLoggedIn(allUsers, username, oldPassword, userRepository,null, null);
         }
 
     }
@@ -66,8 +66,6 @@ public class resetPasswordVerification implements IService{
         return null;
     }
 
-    public user resetPasswordNotLoggedIn(List<user> allUsers, String username, String oldPassword, IUserRepository userRepository) {
-        return resetLoggedIn(allUsers, username, oldPassword, userRepository,null, null);
-    }
+
     
 }

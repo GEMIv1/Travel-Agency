@@ -1,7 +1,5 @@
 package com.example.Travel_agency.services.user_account_services;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,12 +22,13 @@ public class changeAddress implements IService{
         }
         String newAddress = (String) params.get("newAddress");
         String token = (String) params.get("token");
+        IUserRepository userRepository = (IUserRepository) params.get("userRepository");
         List<user> allUsers = (List<user>) params.get("allUsers");
         
-        return changeAddress(newAddress,token,allUsers);
+        return changeAddress(newAddress,token,allUsers,userRepository);
     }
 
-    public boolean changeAddress(String newAddress,String token, List<user> allUsers){
+    public boolean changeAddress(String newAddress,String token, List<user> allUsers, IUserRepository userRepository){
         user user = userAuthRepository.getUserWithToken(token, allUsers);
         user.setAddress(newAddress);
         userRepository.updateAddress(user);

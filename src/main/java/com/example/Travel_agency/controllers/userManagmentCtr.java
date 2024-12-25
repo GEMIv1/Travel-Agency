@@ -120,14 +120,7 @@ public class userManagmentCtr implements IUserManagmentCtr{
         }
         return false;
     }
-    @GetMapping("/travel_agency/get_user_details")
     public List<user> getAllUsers(){
         return userRepository.getAllUsers();
-    }
-    @PostMapping("/travel_agency/logout")
-    public boolean logout(@RequestParam String token, @RequestParam String username){
-
-
-        return false;
     }
 }

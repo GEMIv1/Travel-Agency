@@ -157,13 +157,4 @@ public class APIGateway {
             @RequestParam String token) {
          userDashboardCtr.logout(token);
     }
-
-    
-
-
-
-    
-
-
-
 }
