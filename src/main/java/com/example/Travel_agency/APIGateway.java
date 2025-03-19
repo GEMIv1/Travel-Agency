@@ -93,35 +93,35 @@ public class APIGateway {
         eventManagmentCtr.bookEvent(token, eventName);
     }
 
-    @PostMapping("/travel_agency/dashboard/change_password")
+    @PutMapping("/travel_agency/dashboard/change_password")
     public boolean changePassword(
             @RequestParam String token,
             @RequestParam String newPassword) {
         return userDashboardCtr.changePassword(token, newPassword);
     }
 
-    @PostMapping("/travel_agency/dashboard/change_email")
+    @PutMapping("/travel_agency/dashboard/change_email")
     public boolean changeEmail(
             @RequestParam String token,
             @RequestParam String newEmail) {
         return userDashboardCtr.changeEmail(token, newEmail);
     }
 
-    @PostMapping("/travel_agency/dashboard/change_phone")
+    @PutMapping("/travel_agency/dashboard/change_phone")
     public boolean changePhone(
             @RequestParam String token,
             @RequestParam String newPhone) {
         return userDashboardCtr.changePhone(token, newPhone);
     }
 
-    @PostMapping("/travel_agency/dashboard/change_username")
+    @PutMapping("/travel_agency/dashboard/change_username")
     public boolean changeUsername(
             @RequestParam String token,
             @RequestParam String newUsername) {
         return userDashboardCtr.changeUsername(token, newUsername);
     }
 
-    @PostMapping("/travel_agency/dashboard/change_address")
+    @PutMapping("/travel_agency/dashboard/change_address")
     public boolean changeAddress(
             @RequestParam String token,
             @RequestParam String newAddress) {
@@ -146,7 +146,7 @@ public class APIGateway {
         return userDashboardCtr.getMessages(token);
     }
 
-    @PostMapping("/travel_agency/dashboard/delete_account")
+    @DeleteMapping("/travel_agency/dashboard/delete_account")
     public boolean deleteAccount(
             @RequestParam String token) {
         return userDashboardCtr.deleteAccount(token);
